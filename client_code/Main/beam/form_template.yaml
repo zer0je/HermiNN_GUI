@@ -1,32 +1,32 @@
 container:
   type: ColumnPanel
-  properties: {spacing_above: small}
+  properties: {spacing_above: small, col_widths: '{"HSOBGT":30,"IHTGXQ":30}'}
   data_bindings:
   - {property: tooltip, code: '', writeback: false}
 components:
-- name: text_box_1
-  properties: {text: Beam Analysis, align: center, bold: true, italic: false}
-  type: TextBox
-  layout_properties: {grid_position: 'DNPQTP,WUCOAB', full_width_row: true}
+- name: Title
+  properties: {text: Beam Analysis, bold: true, align: center, font_size: 50}
+  type: Label
+  layout_properties: {grid_position: 'SUYECG,CVGSBW', full_width_row: true, row_background: 'theme:Dark Overlay 2'}
 - name: canvas_1
   properties: {height: 201.44439697265625}
   type: Canvas
   layout_properties: {grid_position: 'GATVPM,MMZIPX', full_width_row: true}
   event_bindings: {reset: canvas_1_reset}
 - name: label_1
-  properties: {text: Left Boundary Condition, align: center, bold: true, underline: false, visible: true, icon: ''}
+  properties: {text: Left Boundary Condition, align: center, bold: true, underline: false, visible: true, icon: '', italic: false}
   type: Label
-  layout_properties: {grid_position: 'QJOPZN,HSOBGT', full_width_row: false}
+  layout_properties: {grid_position: 'QJOPZN,HSOBGT', full_width_row: true, row_background: 'theme:Secondary Container'}
 - name: label_2
   properties: {text: Right Boundary Condition, align: center, bold: true}
   type: Label
-  layout_properties: {grid_position: 'QJOPZN,IHTGXQ'}
+  layout_properties: {grid_position: 'QJOPZN,IHTGXQ', row_background: 'theme:Secondary Container'}
 - name: drop_down_1
   properties:
     items: [Free, Simply Supported, Fixed]
     include_placeholder: false
   type: DropDown
-  layout_properties: {grid_position: 'VVSUVI,IHTHIX'}
+  layout_properties: {grid_position: 'VVSUVI,IHTHIX', full_width_row: true}
   data_bindings: []
 - name: drop_down_2
   properties:
