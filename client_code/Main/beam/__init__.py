@@ -115,6 +115,11 @@ class beam(beamTemplate):
   def Input_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.E=self.input_E.text
+    self.I=self.input_I.text
+    self.L=self.input_L.text
+    self.P=self.input_I.text
+    self.I=self.input_I.text
+    self.I=self.input_I.text
 
 
 
