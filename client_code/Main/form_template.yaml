@@ -13,7 +13,7 @@ components:
   name: navbar_links
   layout_properties: {slot: nav-right}
 - name: column_panel_1
-  properties: {}
+  properties: {wrap_on: mobile, spacing_above: small}
   type: ColumnPanel
   layout_properties: {slot: left-nav}
   components:

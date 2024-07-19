@@ -13,24 +13,81 @@ components:
   type: Canvas
   layout_properties: {grid_position: 'GATVPM,MMZIPX', full_width_row: true}
   event_bindings: {reset: canvas_1_reset}
-- name: label_1
+- name: left_label
   properties: {text: Left Boundary Condition, align: center, bold: true, underline: false, visible: true, icon: '', italic: false}
   type: Label
-  layout_properties: {grid_position: 'QJOPZN,HSOBGT', full_width_row: true, row_background: 'theme:Secondary Container'}
-- name: label_2
+  layout_properties: {grid_position: 'QJOPZN,HSOBGT', full_width_row: true, row_background: 'theme:Disabled Container'}
+- name: right_label
   properties: {text: Right Boundary Condition, align: center, bold: true}
   type: Label
-  layout_properties: {grid_position: 'QJOPZN,IHTGXQ', row_background: 'theme:Secondary Container'}
-- name: drop_down_1
+  layout_properties: {grid_position: 'QJOPZN,IHTGXQ', row_background: 'theme:On Disabled'}
+- name: left_boundary_condition
   properties:
     items: [Free, Simply Supported, Fixed]
     include_placeholder: false
   type: DropDown
   layout_properties: {grid_position: 'VVSUVI,IHTHIX', full_width_row: true}
   data_bindings: []
-- name: drop_down_2
+  event_bindings: {change: left_boundary_condition_change}
+- name: right_boundary_condition
   properties:
     items: [Free, Simply Supported, Fixed]
+    align: full
   type: DropDown
-  layout_properties: {grid_position: 'VVSUVI,HTUQGZ'}
+  layout_properties: {grid_position: 'VVSUVI,CBFZZZ'}
+  event_bindings: {change: right_boundary_condition_change}
+- name: label_E
+  properties: {text: 'Young''s Modulus (E) [Pa]', align: center, bold: true}
+  type: Label
+  layout_properties: {grid_position: 'NMXTIW,BCTPMT', row_background: 'theme:Dark Overlay 1', full_width_row: true}
+- name: input_E
+  properties: {}
+  type: TextBox
+  layout_properties: {grid_position: 'NMXTIW,PZPAFB'}
+  event_bindings: {pressed_enter: text_box_1_pressed_enter}
+- name: label_I
+  properties: {text: 'Moment of Inertia (I) [m^4]', align: center, bold: true}
+  type: Label
+  layout_properties: {grid_position: 'VLWNNO,RDVETY', full_width_row: true, row_background: 'theme:Dark Overlay 1'}
+- name: input_I
+  properties: {}
+  type: TextBox
+  layout_properties: {grid_position: 'VLWNNO,GTIENX'}
+- name: label_L
+  properties: {text: 'Length (L) [m]', align: center, bold: true}
+  type: Label
+  layout_properties: {grid_position: 'KPVOFF,SKXPKU ZDNDWT,FXZQVR', full_width_row: true, row_background: 'theme:Dark Overlay 1'}
+- name: label_P
+  properties: {text: 'Point Load (P) [N]', align: center, bold: true}
+  type: Label
+  layout_properties: {grid_position: 'KPVOFF,SKXPKU TXHXZU,LZVLSX', full_width_row: true}
+- name: input_L
+  properties: {}
+  type: TextBox
+  layout_properties: {grid_position: 'KPVOFF,MUSQIU'}
+- name: input_P
+  properties: {}
+  type: TextBox
+  layout_properties: {grid_position: 'KPVOFF,MUSQIU CRZJAH,SVHPFO'}
+- name: label_x
+  properties: {text: 'Location of Point Load (x) [m]', align: center, bold: true, underline: false}
+  type: Label
+  layout_properties: {grid_position: 'KRCEMH,BNWWHU QKTDIE,DULBBX', full_width_row: true, row_background: 'theme:Dark Overlay 1'}
+- name: label_q
+  properties: {text: 'Uniform Load (q) [N/m]', align: center, bold: true}
+  type: Label
+  layout_properties: {grid_position: 'KRCEMH,BNWWHU NKSZXJ,MELMRC'}
+- name: input_x
+  properties: {}
+  type: TextBox
+  layout_properties: {grid_position: 'KRCEMH,TFFAKX OZWEAP,DWVROY'}
+- name: input_q
+  properties: {}
+  type: TextBox
+  layout_properties: {grid_position: 'KRCEMH,TFFAKX DYDZCG,CIDOOX'}
+- name: Input
+  properties: {text: Input, bold: true, font_size: 20}
+  type: Button
+  layout_properties: {grid_position: 'KDMNCC,WGAMZI', row_background: '', full_width_row: true}
+  event_bindings: {click: Input_click}
 is_package: true
