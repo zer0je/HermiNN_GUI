@@ -8,11 +8,11 @@ components:
   properties: {text: Beam Analysis, bold: true, align: center, font_size: 50}
   type: Label
   layout_properties: {grid_position: 'SUYECG,CVGSBW', full_width_row: true, row_background: 'theme:Dark Overlay 2'}
-- name: canvas_1
+- name: beamfigure
   properties: {height: 201.44439697265625}
   type: Canvas
   layout_properties: {grid_position: 'GATVPM,MMZIPX', full_width_row: true}
-  event_bindings: {reset: canvas_1_reset}
+  event_bindings: {reset: beamfigure_reset}
 - name: left_label
   properties: {text: Left Boundary Condition, align: center, bold: true, underline: false, visible: true, icon: '', italic: false}
   type: Label

@@ -1,5 +1,6 @@
 from ._anvil_designer import beamTemplate
 from anvil import *
+import plotly.graph_objects as go
 import anvil.server
 
 
@@ -9,8 +10,8 @@ class beam(beamTemplate):
     self.init_components(**properties)
 
     # Set Color
-    self.Input.background = "#A4A4A4"
-    self.Input.foreground = "#000000"
+    self.Input.background = "#CED8F6"
+
 
     # Initialize dropdown menus
     self.left_boundary_condition.items = ["Free", "Simply supported", "Fixed"]
@@ -21,7 +22,7 @@ class beam(beamTemplate):
     self.right_boundary_condition.set_event_handler('change',self.right_boundary_condition_change)
 
     # Initial canvas drawing
-    self.canvas_1_reset()
+    self.beamfigure_reset()
 
     # Initial Analysis Data
     self.E=1
@@ -32,14 +33,14 @@ class beam(beamTemplate):
     self.q=0
 
 
-  def canvas_1_reset(self, **event_args):
+  def beamfigure_reset(self, **event_args):
         """This method is called when the canvas is reset and cleared, such as when the window resizes, or the canvas is added to a form."""
         x_start, y_start, beam_length, beam_height = self.create_beam()
 
 
   def create_beam(self):
         """This method is called when the canvas is reset and cleared, such as when the window resizes, or the canvas is added to a form."""
-        canvas = self.canvas_1
+        canvas = self.beamfigure
         width, height = canvas.get_width(), canvas.get_height()
 
         # Clear the canvas by drawing a white rectangle over the entire canvas
@@ -81,7 +82,7 @@ class beam(beamTemplate):
         pass
 
   def draw_simply_supported(self, x, y, beam_height):
-        canvas = self.canvas_1
+        canvas = self.beamfigure
         canvas.fill_style = "#000000"
         # Draw a triangle for simply supported condition
         canvas.begin_path()
@@ -92,7 +93,7 @@ class beam(beamTemplate):
         canvas.fill()
 
   def draw_fixed(self, x, y, beam_height):
-    canvas = self.canvas_1
+    canvas = self.beamfigure
     canvas.fill_style = "#000000"
 
     # Draw a thicker vertical rectangle for fixed condition extending above and below the beam
@@ -118,8 +119,9 @@ class beam(beamTemplate):
     self.I=self.input_I.text
     self.L=self.input_L.text
     self.P=self.input_I.text
-    self.I=self.input_I.text
-    self.I=self.input_I.text
+    self.x=self.input_x.text
+    self.q=self.input_q.text
+    anvil.server.call('hello',0)
 
 
 

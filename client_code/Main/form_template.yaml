@@ -25,7 +25,7 @@ components:
   - name: button_2
     properties: {text: 2D Plate}
     type: Button
-    layout_properties: {grid_position: 'QMPPGZ,RRITDH', full_width_row: true}
+    layout_properties: {grid_position: 'YEGLAU,SRRRXI'}
     event_bindings: {click: button_2_click}
 - name: rich_text_1
   properties: {content: PINN GUI, format: plain_text}

@@ -7,10 +7,17 @@ runtime_options:
   version: 2
   client_version: '3'
   server_version: python3-sandbox
-  server_spec: {base: python310-standard}
+  server_spec: {base: python310-machine-learning}
+  server_spec_disabled:
+    requirements: |-
+      torch
+      matplotlib
+      scikit-learn
+      scipy
+    base: python310-machine-learning
 dependencies: []
 services:
 - source: /runtime/services/tables.yml
   client_config: {}
-  server_config: {}
+  server_config: {auto_create_missing_columns: true}
 startup: {type: form, module: Main}
