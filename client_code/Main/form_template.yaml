@@ -23,9 +23,10 @@ components:
     layout_properties: {grid_position: 'ZHWNMV,WKDZAW', full_width_row: true}
     event_bindings: {click: button_1_click}
   - name: button_2
-    properties: {text: 2D_Plate}
+    properties: {text: 2D Plate}
     type: Button
     layout_properties: {grid_position: 'QMPPGZ,RRITDH', full_width_row: true}
+    event_bindings: {click: button_2_click}
 - name: rich_text_1
   properties: {content: PINN GUI, format: plain_text}
   type: RichText
