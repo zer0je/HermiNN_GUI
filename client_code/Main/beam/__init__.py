@@ -1,5 +1,8 @@
 from ._anvil_designer import beamTemplate
 from anvil import *
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
 import plotly.graph_objects as go
 import anvil.server
 
@@ -121,7 +124,6 @@ class beam(beamTemplate):
     self.P=self.input_I.text
     self.x=self.input_x.text
     self.q=self.input_q.text
-    anvil.server.call('hello',0)
 
 
 

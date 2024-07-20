@@ -21,3 +21,28 @@ services:
   client_config: {}
   server_config: {auto_create_missing_columns: true}
 startup: {type: form, module: Main}
+db_schema:
+  users:
+    client: none
+    server: full
+    columns:
+    - name: email
+      admin_ui: {order: 0, width: 200}
+      type: string
+    - name: enabled
+      admin_ui: {order: 1, width: 200}
+      type: bool
+    - name: last_login
+      admin_ui: {order: 2, width: 200}
+      type: datetime
+    - name: password_hash
+      admin_ui: {order: 3, width: 200}
+      type: string
+    - name: n_password_failures
+      admin_ui: {order: 4, width: 200}
+      type: number
+    - name: confirmed_email
+      admin_ui: {order: 5, width: 200}
+      type: bool
+    title: Users
+uplink_visible: true
