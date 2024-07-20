@@ -128,7 +128,7 @@ class beam(beamTemplate):
     self.x=self.input_x.text
     self.q=self.input_q.text
     anvil.server.call('initialize_beam_parameters', self.E, self.I, self.P, self.L)
-    img_media = anvil.server.call('figure_beam')
+    img_media = anvil.server.call('calculate_beam')
     self.image_beam_deflection.source = img_media
 
 
