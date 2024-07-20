@@ -90,4 +90,8 @@ components:
   type: Button
   layout_properties: {grid_position: 'KDMNCC,WGAMZI', row_background: '', full_width_row: true}
   event_bindings: {click: Input_click}
+- name: image_beam_deflection
+  properties: {visible: true}
+  type: Image
+  layout_properties: {grid_position: 'KMZCAX,FRFPST', full_width_row: true}
 is_package: true
