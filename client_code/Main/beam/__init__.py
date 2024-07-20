@@ -15,10 +15,6 @@ class beam(beamTemplate):
     # Set Color
     self.Input.background = "#CED8F6"
 
-    # Set Size
-    self.image_beam_deflection.width = "1000px"  # 가로 크기 설정
-    self.image_beam_deflection.height = "800px"  # 세로 크기 설정
-
     # Initialize dropdown menus
     self.left_boundary_condition.items = ["Free", "Simply supported", "Fixed"]
     self.right_boundary_condition.items = ["Free", "Simply supported", "Fixed"]
@@ -130,6 +126,8 @@ class beam(beamTemplate):
     anvil.server.call('initialize_beam_parameters', self.E, self.I, self.P, self.L)
     img_media = anvil.server.call('calculate_beam')
     self.image_beam_deflection.source = img_media
+    self.image_beam_deflection.width = "800px"  # 이미지 크기 설정
+    self.image_beam_deflection.height = "600px"
 
 
 
