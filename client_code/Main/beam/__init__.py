@@ -26,13 +26,6 @@ class beam(beamTemplate):
     # Initial canvas drawing
     self.beamfigure_reset()
 
-    # Initial Analysis Data
-    self.E=1
-    self.I=1
-    self.L=1
-    self.P=0
-    self.x_p=0
-    self.q=0
 
 
   def beamfigure_reset(self, **event_args):
@@ -117,17 +110,24 @@ class beam(beamTemplate):
 
   def Input_click(self, **event_args):
     """This method is called when the button is clicked"""
-    self.E=self.input_E.text
-    self.I=self.input_I.text
-    self.L=self.input_L.text
-    self.P=self.input_I.text
-    self.x=self.input_x.text
-    self.q=self.input_q.text
-    anvil.server.call('initialize_beam_parameters', self.E, self.I, self.P, self.L)
-    img_media = anvil.server.call('calculate_beam')
+    self.E=self.input_E.text if self.input_E.text else '1'
+    self.I=self.input_I.text if self.input_I.text else '1'
+    self.L=self.input_L.text if self.input_L.text else '1'
+    self.P=self.input_P.text if self.input_P.text else '0'
+    self.x_p=self.input_x_p.text if self.input_x_p.text else '0'
+    self.q=self.input_q.text if self.input_q.text else '0'
+    self.lr=self.input_lr.text if self.input_lr.text else '0.2'
+    self.epochs=self.input_epochs.text if self.input_epochs.text else '200'
+    
+    anvil.server.call('initialize_beam_parameters', self.E, self.I, self.L, self.P,self.x_p,self.lr,self.epochs)
+    img_media, result = anvil.server.call('calculate_beam')
     self.image_beam_deflection.source = img_media
-    self.image_beam_deflection.width = "800px"  # 이미지 크기 설정
-    self.image_beam_deflection.height = "600px"
+    self.image_beam_deflection.width = "1000px"  
+    self.image_beam_deflection.height = "800px"
+    self.text_result.text=result
+    self.text_result.height = "250px"
+    
+
 
 
 

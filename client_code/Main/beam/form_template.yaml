@@ -36,55 +36,106 @@ components:
   type: DropDown
   layout_properties: {grid_position: 'VVSUVI,CBFZZZ'}
   event_bindings: {change: right_boundary_condition_change}
-- name: label_E
-  properties: {text: 'Young''s Modulus (E) [Pa]', align: center, bold: true}
-  type: Label
-  layout_properties: {grid_position: 'NMXTIW,BCTPMT', row_background: 'theme:Dark Overlay 1', full_width_row: true}
+- name: linear_panel_1
+  properties: {}
+  type: LinearPanel
+  layout_properties: {grid_position: 'CELUKQ,NUVYKA', row_background: 'theme:Dark Overlay 1'}
+  components:
+  - name: label_E
+    properties: {text: 'Young''s Modulus (E) [Pa]', align: center, bold: true}
+    type: Label
 - name: input_E
   properties: {}
   type: TextBox
-  layout_properties: {grid_position: 'NMXTIW,PZPAFB'}
+  layout_properties: {grid_position: 'CELUKQ,KWEKXS'}
   event_bindings: {pressed_enter: text_box_1_pressed_enter}
-- name: label_I
-  properties: {text: 'Moment of Inertia (I) [m^4]', align: center, bold: true}
-  type: Label
-  layout_properties: {grid_position: 'VLWNNO,RDVETY', full_width_row: true, row_background: 'theme:Dark Overlay 1'}
+- name: linear_panel_2
+  properties: {}
+  type: LinearPanel
+  layout_properties: {grid_position: 'QNNTCN,KMQIES', row_background: 'theme:Dark Overlay 1'}
+  components:
+  - name: label_I
+    properties: {text: 'Moment of Inertia (I) [m^4]', align: center, bold: true}
+    type: Label
 - name: input_I
   properties: {}
   type: TextBox
-  layout_properties: {grid_position: 'VLWNNO,GTIENX'}
-- name: label_L
-  properties: {text: 'Length (L) [m]', align: center, bold: true}
-  type: Label
-  layout_properties: {grid_position: 'KPVOFF,SKXPKU ZDNDWT,FXZQVR', full_width_row: true, row_background: 'theme:Dark Overlay 1'}
-- name: label_P
-  properties: {text: 'Point Load (P) [N]', align: center, bold: true}
-  type: Label
-  layout_properties: {grid_position: 'KPVOFF,SKXPKU TXHXZU,LZVLSX', full_width_row: true}
+  layout_properties: {grid_position: 'QNNTCN,ZIIYLP'}
+- name: linear_panel_3
+  properties: {}
+  type: LinearPanel
+  layout_properties: {grid_position: 'DNYHSE,HYUDYE', row_background: 'theme:Dark Overlay 1'}
+  components:
+  - name: label_L
+    properties: {text: 'Length (L) [m]', align: center, bold: true}
+    type: Label
 - name: input_L
   properties: {}
   type: TextBox
-  layout_properties: {grid_position: 'KPVOFF,MUSQIU'}
+  layout_properties: {grid_position: 'DNYHSE,WBGVUD'}
+- name: linear_panel_4
+  properties: {}
+  type: LinearPanel
+  layout_properties: {grid_position: 'PKNCCO,BKATDR', row_background: 'theme:Dark Overlay 1'}
+  components:
+  - name: label_P
+    properties: {text: 'Point Load (P) [N]', align: center, bold: true}
+    type: Label
 - name: input_P
   properties: {}
   type: TextBox
-  layout_properties: {grid_position: 'KPVOFF,MUSQIU CRZJAH,SVHPFO'}
-- name: label_x
-  properties: {text: 'Location of Point Load (x) [m]', align: center, bold: true, underline: false}
-  type: Label
-  layout_properties: {grid_position: 'KRCEMH,BNWWHU QKTDIE,DULBBX', full_width_row: true, row_background: 'theme:Dark Overlay 1'}
-- name: label_q
-  properties: {text: 'Uniform Load (q) [N/m]', align: center, bold: true}
-  type: Label
-  layout_properties: {grid_position: 'KRCEMH,BNWWHU NKSZXJ,MELMRC'}
-- name: input_x
+  layout_properties: {grid_position: 'PKNCCO,GVCOSR'}
+- name: linear_panel_5
+  properties: {}
+  type: LinearPanel
+  layout_properties: {grid_position: 'RCXHGM,BHIGNW', row_background: 'theme:Dark Overlay 1'}
+  components:
+  - name: label_x_p
+    properties: {text: 'Location of Point Load (x) [m]', align: center, bold: true, underline: false}
+    type: Label
+    layout_properties: {}
+- name: input_x_p
   properties: {}
   type: TextBox
-  layout_properties: {grid_position: 'KRCEMH,TFFAKX OZWEAP,DWVROY'}
+  layout_properties: {grid_position: 'RCXHGM,WDJEHV'}
+- name: linear_panel_6
+  properties: {}
+  type: LinearPanel
+  layout_properties: {grid_position: 'ZNGNIB,CTHGIM', row_background: 'theme:Dark Overlay 1'}
+  components:
+  - name: label_q
+    properties: {text: 'Uniform Load (q) [N/m]', align: center, bold: true}
+    type: Label
 - name: input_q
   properties: {}
   type: TextBox
-  layout_properties: {grid_position: 'KRCEMH,TFFAKX DYDZCG,CIDOOX'}
+  layout_properties: {grid_position: 'ZNGNIB,MCZKFT'}
+- name: linear_panel_7
+  properties: {}
+  type: LinearPanel
+  layout_properties: {grid_position: 'RGENGQ,LKGDEO', row_background: 'theme:Tertiary'}
+  components:
+  - name: label_lr
+    properties: {text: Learning Rate (lr), align: center, bold: true}
+    type: Label
+    layout_properties: {}
+- name: input_lr
+  properties: {}
+  type: TextBox
+  layout_properties: {grid_position: 'RGENGQ,AUVCWA'}
+- name: linear_panel_8
+  properties: {}
+  type: LinearPanel
+  layout_properties: {grid_position: 'LTOXEL,WCQFZI', row_background: 'theme:Tertiary'}
+  components:
+  - name: label_epochs
+    properties: {text: Number of Epochs, align: center, bold: true}
+    type: Label
+    layout_properties: {}
+- name: input_epochs
+  properties: {underline: false}
+  type: TextBox
+  layout_properties: {grid_position: 'LTOXEL,NTBECJ'}
 - name: Input
   properties: {text: Input, bold: true, font_size: 20}
   type: Button
@@ -94,4 +145,8 @@ components:
   properties: {visible: true}
   type: Image
   layout_properties: {grid_position: 'KMZCAX,FRFPST', full_width_row: true}
+- name: text_result
+  properties: {}
+  type: TextArea
+  layout_properties: {grid_position: 'OZELII,TFRORT'}
 is_package: true
