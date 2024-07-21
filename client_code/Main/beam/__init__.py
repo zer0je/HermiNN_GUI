@@ -128,7 +128,7 @@ class beam(beamTemplate):
     self.lr=self.input_lr.text if self.input_lr.text else '0.2'
     self.epochs=self.input_epochs.text if self.input_epochs.text else '200'
     
-    anvil.server.call('initialize_beam_parameters',left_condition,right_condition, self.E, self.I, self.L, self.P,self.x_p,self.lr,self.epochs)
+    anvil.server.call('initialize_beam_parameters',left_condition,right_condition, self.E, self.I, self.L, self.P,self.x_p,self.q,self.lr,self.epochs)
     img_media, result = anvil.server.call('calculate_beam')
     self.image_beam_deflection.source = img_media
     self.image_beam_deflection.width = "1000px"  
