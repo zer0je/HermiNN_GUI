@@ -29,7 +29,6 @@ a>.anvil-component-icon.right_edge-icon,
   padding-bottom: 8px;
 }
 .anvil-label>.label-text, a>.link-text {
-  font-size: 16px;
   line-height: 1.5;
   border-radius: 8px 8px 0 0;
 }

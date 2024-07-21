@@ -5,9 +5,10 @@ container:
   - {property: tooltip, code: '', writeback: false}
 components:
 - name: Title
-  properties: {text: Beam Analysis, bold: true, align: center, font_size: 50}
+  properties: {text: Beam Analysis, bold: true, align: center, font_size: 50, visible: true}
   type: Label
   layout_properties: {grid_position: 'SUYECG,CVGSBW', full_width_row: true, row_background: 'theme:Dark Overlay 2'}
+  data_bindings: []
 - name: beamfigure
   properties: {height: 201.44439697265625}
   type: Canvas

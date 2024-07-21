@@ -134,7 +134,7 @@ class beam(beamTemplate):
     self.image_beam_deflection.width = "1000px"  
     self.image_beam_deflection.height = "800px"
     self.text_result.text=result
-    self.text_result.height = "250px"
+    self.text_result.height = "110px"
     
 
 
