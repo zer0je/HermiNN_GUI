@@ -23,11 +23,10 @@ class beam(beamTemplate):
     self.left_boundary_condition.set_event_handler('change',self.left_boundary_condition_change)
     self.right_boundary_condition.set_event_handler('change',self.right_boundary_condition_change)
 
-    # Initial canvas drawing
+    # Iniate canvas drawing
     self.beamfigure_reset()
 
-
-
+    
   def beamfigure_reset(self, **event_args):
         """This method is called when the canvas is reset and cleared, such as when the window resizes, or the canvas is added to a form."""
         x_start, y_start, beam_length, beam_height = self.create_beam()
@@ -108,8 +107,18 @@ class beam(beamTemplate):
         x_start, y_start, beam_length, beam_height = self.create_beam()
         self.draw_boundary_conditions(x_start, y_start, beam_length, beam_height)
 
+  def convert_boundary_condition_value(self,condition):
+    if condition == "Free":
+        return 'x'
+    elif condition == "Simply supported":
+        return 's'
+    elif condition == "Fixed":
+        return 'f'
+  
   def Input_click(self, **event_args):
     """This method is called when the button is clicked"""
+    left_condition=self.convert_boundary_condition_value(self.left_boundary_condition.selected_value)
+    right_condition=self.convert_boundary_condition_value(self.right_boundary_condition.selected_value)
     self.E=self.input_E.text if self.input_E.text else '1'
     self.I=self.input_I.text if self.input_I.text else '1'
     self.L=self.input_L.text if self.input_L.text else '1'
@@ -119,7 +128,7 @@ class beam(beamTemplate):
     self.lr=self.input_lr.text if self.input_lr.text else '0.2'
     self.epochs=self.input_epochs.text if self.input_epochs.text else '200'
     
-    anvil.server.call('initialize_beam_parameters', self.E, self.I, self.L, self.P,self.x_p,self.lr,self.epochs)
+    anvil.server.call('initialize_beam_parameters',left_condition,right_condition, self.E, self.I, self.L, self.P,self.x_p,self.lr,self.epochs)
     img_media, result = anvil.server.call('calculate_beam')
     self.image_beam_deflection.source = img_media
     self.image_beam_deflection.width = "1000px"  
