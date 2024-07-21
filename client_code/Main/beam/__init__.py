@@ -123,7 +123,7 @@ class beam(beamTemplate):
     self.I=self.input_I.text if self.input_I.text else '1'
     self.L=self.input_L.text if self.input_L.text else '1'
     self.P=self.input_P.text if self.input_P.text else '0'
-    self.x_p=self.input_x_p.text if self.input_x_p.text else self.input_L.text
+    self.x_p=self.input_x_p.text if self.input_x_p.text else '0'
     self.q=self.input_q.text if self.input_q.text else '0'
     self.lr=self.input_lr.text if self.input_lr.text else '0.2'
     self.epochs=self.input_epochs.text if self.input_epochs.text else '200'
