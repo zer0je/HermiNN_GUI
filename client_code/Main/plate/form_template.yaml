@@ -9,23 +9,20 @@ components:
   type: Label
   layout_properties: {grid_position: 'SUYECG,CVGSBW', full_width_row: true, row_background: 'theme:Dark Overlay 2'}
   data_bindings: []
-- name: plate_figure
+- name: platefigure
   properties: {height: 201.44439697265625}
   type: Canvas
   layout_properties: {grid_position: 'GATVPM,MMZIPX', full_width_row: true}
-  event_bindings: {reset: plate_figure_reset}
+  event_bindings: {reset: platefigure_reset}
 - name: label_boundary_condition
   properties: {text: Boundary Condition, align: center, bold: true, underline: false, visible: true, icon: '', italic: false}
   type: Label
   layout_properties: {grid_position: 'QJOPZN,HSOBGT', full_width_row: true, row_background: 'theme:Disabled Container'}
 - name: boundary_condition
   properties:
-    items: [Free, Simply Supported, Fixed]
-    include_placeholder: false
+    items: [Clamped, Simply supported, '']
   type: DropDown
-  layout_properties: {grid_position: 'VVSUVI,IHTHIX', full_width_row: true}
-  data_bindings: []
-  event_bindings: {change: left_boundary_condition_change}
+  layout_properties: {grid_position: 'TPGOJE,TBKJBL', full_width_row: true}
 - name: linear_panel_1
   properties: {}
   type: LinearPanel
@@ -35,7 +32,7 @@ components:
     properties: {text: 'Young''s Modulus (E) [Pa]', align: center, bold: true}
     type: Label
 - name: input_E
-  properties: {}
+  properties: {text: '206e09'}
   type: TextBox
   layout_properties: {grid_position: 'CELUKQ,KWEKXS'}
   event_bindings: {pressed_enter: text_box_1_pressed_enter}
@@ -49,7 +46,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_mu
-  properties: {}
+  properties: {text: '0.3'}
   type: TextBox
   layout_properties: {grid_position: 'QNNTCN,ZIIYLP'}
 - name: linear_panel_3
@@ -62,7 +59,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_a
-  properties: {}
+  properties: {text: '1'}
   type: TextBox
   layout_properties: {grid_position: 'DNYHSE,WBGVUD'}
 - name: linear_panel_4
@@ -75,7 +72,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_b
-  properties: {}
+  properties: {text: '1'}
   type: TextBox
   layout_properties: {grid_position: 'PKNCCO,GVCOSR'}
 - name: linear_panel_5
@@ -88,7 +85,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_h
-  properties: {}
+  properties: {text: '0.001'}
   type: TextBox
   layout_properties: {grid_position: 'RCXHGM,WDJEHV'}
 - name: linear_panel_6
@@ -114,7 +111,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_lr
-  properties: {}
+  properties: {text: '0.01'}
   type: TextBox
   layout_properties: {grid_position: 'RGENGQ,AUVCWA'}
 - name: linear_panel_8
@@ -127,7 +124,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_epochs
-  properties: {underline: false}
+  properties: {underline: false, text: '210'}
   type: TextBox
   layout_properties: {grid_position: 'LTOXEL,NTBECJ'}
 - name: Input
@@ -136,6 +133,10 @@ components:
   layout_properties: {grid_position: 'KDMNCC,WGAMZI', row_background: '', full_width_row: true}
   event_bindings: {click: Input_click}
 - name: image_plate_deflection
+  properties: {}
+  type: Image
+  layout_properties: {grid_position: 'AJGHOG,LNRJKF', full_width_row: true}
+- name: image_plate_displacement
   properties: {visible: true}
   type: Image
   layout_properties: {grid_position: 'KMZCAX,FRFPST', full_width_row: true}
