@@ -6,9 +6,9 @@ unique_ids:
     Main.beam.RowTemplate2: '1721372407784611325061609.5927'
     Main.beam.RowTemplate3: '1721372483731155123467631.75412'
     Main.beam.RowTemplate4: '1721373268701554065635741.4286'
+    Main.plate: '1721545629570815890751254.9916'
   modules: {}
-  server_modules:
-    ServerModule1: '1721357327697320372607815.5835'
+  server_modules: {}
   assets:
     standard-page.html: MFO4D2LBFNQ7Y6DYFQU5X2GUXNE6JLIM
     theme.css: 7G6J7HJZIPGJXEI4DHOANGAKE5VGVRIQ

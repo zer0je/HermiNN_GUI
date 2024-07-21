@@ -5,6 +5,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 from .beam import beam
+from .plate import plate
 
 
 class Main(MainTemplate):
@@ -16,10 +17,11 @@ class Main(MainTemplate):
 
   def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
-    self.content_panel.clear()  # 기존 폼의 내용을 지웁니다.
-    self.content_panel.add_component(beam())  # 새로운 폼을 추가합니다.
+    self.content_panel.clear()  
+    self.content_panel.add_component(beam())  
 
   def button_2_click(self, **event_args):
     """This method is called when the button is clicked"""
-    pass
+    self.content_panel.clear()  
+    self.content_panel.add_component(plate())  
 

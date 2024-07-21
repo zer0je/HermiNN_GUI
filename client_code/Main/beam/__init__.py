@@ -52,7 +52,27 @@ class beam(beamTemplate):
         # Set drawing style
         canvas.fill_style = "#000000"  # Black color
         canvas.fill_rect(x_start, y_start, beam_length, beam_height)
-        
+
+        # Draw arrow indicating direction (rightward arrow at the end of the beam)
+        arrow_length = 80
+        arrow_height = 20
+        x_arrow_start = x_start - arrow_length
+        y_arrow_start = y_start + beam_height-45
+
+        canvas.stroke_style = "#000000"
+        canvas.begin_path()
+        canvas.move_to(x_arrow_start, y_arrow_start)
+        canvas.line_to(x_arrow_start + arrow_length, y_arrow_start)
+        canvas.line_to(x_arrow_start + arrow_length - arrow_height / 2, y_arrow_start - arrow_height / 2)
+        canvas.move_to(x_arrow_start + arrow_length, y_arrow_start)
+        canvas.line_to(x_arrow_start + arrow_length - arrow_height / 2, y_arrow_start + arrow_height / 2)
+        canvas.stroke()
+    
+        # Draw x-axis label
+        canvas.fill_style = "#000000"
+        canvas.font = "14px Arial"
+        canvas.fill_text("x", x_arrow_start + arrow_length + 10, y_arrow_start + 5)
+
         # Return beam position and dimensions
         return x_start, y_start, beam_length, beam_height
 
