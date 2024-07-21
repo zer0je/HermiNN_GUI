@@ -71,7 +71,7 @@ components:
     properties: {text: 'Length (L) [m]', align: center, bold: true}
     type: Label
 - name: input_L
-  properties: {text: '1'}
+  properties: {text: '10'}
   type: TextBox
   layout_properties: {grid_position: 'DNYHSE,WBGVUD'}
 - name: linear_panel_4
@@ -83,7 +83,7 @@ components:
     properties: {text: 'Point Load (P) [N]', align: center, bold: true}
     type: Label
 - name: input_P
-  properties: {}
+  properties: {text: '100'}
   type: TextBox
   layout_properties: {grid_position: 'PKNCCO,GVCOSR'}
 - name: linear_panel_5
@@ -96,7 +96,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_x_p
-  properties: {}
+  properties: {text: '10'}
   type: TextBox
   layout_properties: {grid_position: 'RCXHGM,WDJEHV'}
 - name: linear_panel_6
@@ -134,7 +134,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_epochs
-  properties: {underline: false, text: '200'}
+  properties: {underline: false, text: '1000'}
   type: TextBox
   layout_properties: {grid_position: 'LTOXEL,NTBECJ'}
 - name: Input

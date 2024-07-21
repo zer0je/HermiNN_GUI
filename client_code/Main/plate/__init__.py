@@ -67,7 +67,7 @@ class plate(plateTemplate):
   def Input_click(self, **event_args):
     """This method is called when the button is clicked"""
     boundary_condition=self.convert_boundary_condition_value(self.boundary_condition.selected_value)
-    self.E = self.input_E.text if self.input_E.text else "1"
+    self.E = self.input_E.text if self.input_E.text else "206e09"
     self.mu= self.input_mu.text if self.input_mu.text else "0.3"
     self.a = self.input_a.text if self.input_a.text else "1"
     self.b = self.input_b.text if self.input_b.text else "1"
@@ -81,10 +81,15 @@ class plate(plateTemplate):
     self.image_plate_deflection.source = img_3d
     self.image_plate_deflection.width = "1000px"
     self.image_plate_deflection.height = "800px"
+    self.image_plate_deflection.horizontal_align='center'
+    self.image_plate_deflection.spacing_above='small'
+    self.image_plate_deflection.spacing_below='small'
     
     self.image_plate_displacement.source = img_2d
     self.image_plate_displacement.width = "1000px"
     self.image_plate_displacement.height = "800px"
+    self.image_plate_displacement.spacing_above='small'
+    self.image_plate_displacement.spacing_below='small'
     
     self.text_result.text = result
     self.text_result.height = "110px"
