@@ -1,3 +1,11 @@
+'''
+GUI Built by Yeong Je Kim
+email: satiho@snu.ac.kr
+
+Architecture Built by Jinkyo Han
+email: 38jinkyo@snu.ac.kr
+'''
+
 from ._anvil_designer import MainTemplate
 from anvil import *
 import anvil.tables as tables
