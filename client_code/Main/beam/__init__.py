@@ -137,6 +137,7 @@ class beam(beamTemplate):
   
   def Input_click(self, **event_args):
     """This method is called when the button is clicked"""
+    
     left_condition=self.convert_boundary_condition_value(self.left_boundary_condition.selected_value)
     right_condition=self.convert_boundary_condition_value(self.right_boundary_condition.selected_value)
     self.E=self.input_E.text if self.input_E.text else '206e09'

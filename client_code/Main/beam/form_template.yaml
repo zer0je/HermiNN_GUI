@@ -149,5 +149,5 @@ components:
 - name: text_result
   properties: {}
   type: TextArea
-  layout_properties: {grid_position: 'OZELII,TFRORT'}
+  layout_properties: {grid_position: 'OZELII,TFRORT', full_width_row: true}
 is_package: true
