@@ -7,7 +7,10 @@ Original file is located at
     https://colab.research.google.com/drive/10l8YO72WFRVjm9JxazTH1hnbV8bdosIL
 """
 
-!pip install anvil-uplink
+'''
+Type at terminal
+>>!pip install anvil-uplink
+'''
 
 # Import Essentials
 import numpy as np
