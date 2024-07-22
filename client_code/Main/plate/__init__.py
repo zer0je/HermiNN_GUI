@@ -50,10 +50,10 @@ class plate(plateTemplate):
     # Draw x-axis label
     canvas.fill_style = "#000000"
     canvas.font = "16px Arial"
-    canvas.fill_text('2b', x_start - 20, y_start + plate_height / 2 + 5)  
+    canvas.fill_text('height', x_start - 80, y_start + plate_height / 2 + 5)  
     
     # Draw y-axis label
-    canvas.fill_text('2a', x_start + plate_width / 2 - 10, y_start - 5)
+    canvas.fill_text('width', x_start + plate_width / 2 - 10, y_start - 5)
 
 
 
@@ -69,14 +69,14 @@ class plate(plateTemplate):
     boundary_condition=self.convert_boundary_condition_value(self.boundary_condition.selected_value)
     self.E = self.input_E.text if self.input_E.text else "206e09"
     self.mu= self.input_mu.text if self.input_mu.text else "0.3"
-    self.a = self.input_a.text if self.input_a.text else "1"
-    self.b = self.input_b.text if self.input_b.text else "1"
+    self.width = self.input_width.text if self.input_width.text else "2"
+    self.height = self.input_height.text if self.input_height.text else "2"
     self.h= self.input_h.text if self.input_h.text else "0.001"
     self.q = self.input_q.text if self.input_q.text else "0"
     self.lr = self.input_lr.text if self.input_lr.text else "0.01"
     self.epochs = self.input_epochs.text if self.input_epochs.text else "210"
 
-    anvil.server.call("initialize_plate_parameters",boundary_condition,self.E,self.mu,self.a,self.b,self.h,self.q,self.lr,self.epochs)
+    anvil.server.call("initialize_plate_parameters",boundary_condition,self.E,self.mu,self.width,self.height,self.h,self.q,self.lr,self.epochs)
     img_3d,img_2d, result = anvil.server.call("calculate_plate")
     self.image_plate_deflection.source = img_3d
     self.image_plate_deflection.width = "1000px"

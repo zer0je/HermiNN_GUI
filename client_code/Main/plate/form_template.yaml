@@ -54,12 +54,12 @@ components:
   type: LinearPanel
   layout_properties: {grid_position: 'DNYHSE,HYUDYE', row_background: 'theme:Dark Overlay 1'}
   components:
-  - name: label_a
-    properties: {text: 'Half Transverse Length (a) [m]', align: center, bold: true}
+  - name: label_width
+    properties: {text: 'Width [m]', align: center, bold: true}
     type: Label
     layout_properties: {}
-- name: input_a
-  properties: {text: '1'}
+- name: input_width
+  properties: {text: '2'}
   type: TextBox
   layout_properties: {grid_position: 'DNYHSE,WBGVUD'}
 - name: linear_panel_4
@@ -67,12 +67,12 @@ components:
   type: LinearPanel
   layout_properties: {grid_position: 'PKNCCO,BKATDR', row_background: 'theme:Dark Overlay 1'}
   components:
-  - name: label_b
-    properties: {text: 'Half Longitudinal Length (b) [m]', align: center, bold: true}
+  - name: label_height
+    properties: {text: 'Height [m]', align: center, bold: true}
     type: Label
     layout_properties: {}
-- name: input_b
-  properties: {text: '1'}
+- name: input_height
+  properties: {text: '2'}
   type: TextBox
   layout_properties: {grid_position: 'PKNCCO,GVCOSR'}
 - name: linear_panel_5
@@ -81,7 +81,7 @@ components:
   layout_properties: {grid_position: 'RCXHGM,BHIGNW', row_background: 'theme:Dark Overlay 1'}
   components:
   - name: label_h
-    properties: {text: 'Thickness (h) [m]', align: center, bold: true, underline: false}
+    properties: {text: 'Thickness (t) [m]', align: center, bold: true, underline: false}
     type: Label
     layout_properties: {}
 - name: input_h
@@ -143,5 +143,5 @@ components:
 - name: text_result
   properties: {}
   type: TextArea
-  layout_properties: {grid_position: 'OZELII,TFRORT'}
+  layout_properties: {grid_position: 'OZELII,TFRORT', full_width_row: true}
 is_package: true
