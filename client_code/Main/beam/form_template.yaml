@@ -24,7 +24,7 @@ components:
   layout_properties: {grid_position: 'QJOPZN,IHTGXQ', row_background: 'theme:On Disabled'}
 - name: left_boundary_condition
   properties:
-    items: [Free, Simply Supported, Fixed]
+    items: [Simply Supported, Fixed, Free]
     include_placeholder: false
   type: DropDown
   layout_properties: {grid_position: 'VVSUVI,IHTHIX', full_width_row: true}
@@ -32,7 +32,7 @@ components:
   event_bindings: {change: left_boundary_condition_change}
 - name: right_boundary_condition
   properties:
-    items: [Free, Simply Supported, Fixed]
+    items: [Simply Supported, Fixed, Free]
     align: full
   type: DropDown
   layout_properties: {grid_position: 'VVSUVI,CBFZZZ'}
@@ -96,7 +96,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_x_p
-  properties: {text: '10'}
+  properties: {text: '5'}
   type: TextBox
   layout_properties: {grid_position: 'RCXHGM,WDJEHV'}
 - name: linear_panel_6
@@ -142,6 +142,10 @@ components:
   type: Button
   layout_properties: {grid_position: 'KDMNCC,WGAMZI', row_background: '', full_width_row: true}
   event_bindings: {click: Input_click}
+- name: canvas_progress
+  properties: {height: 100}
+  type: Canvas
+  layout_properties: {grid_position: 'VQOXAJ,CXTWMT'}
 - name: image_beam_deflection
   properties: {visible: true}
   type: Image

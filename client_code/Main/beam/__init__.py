@@ -5,6 +5,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import plotly.graph_objects as go
 import anvil.server
+import anvil.js.window as window
+import time
 
 
 class beam(beamTemplate):
@@ -16,20 +18,26 @@ class beam(beamTemplate):
     self.Input.background = "#CED8F6"
 
     # Initialize dropdown menus
-    self.left_boundary_condition.items = ["Free", "Simply supported", "Fixed"]
-    self.right_boundary_condition.items = ["Free", "Simply supported", "Fixed"]
+    self.left_boundary_condition.items = [ "Simply supported", "Fixed","Free"]
+    self.right_boundary_condition.items = [ "Simply supported", "Fixed","Free"]
 
     # Attach change event handlers
     self.left_boundary_condition.set_event_handler('change',self.left_boundary_condition_change)
     self.right_boundary_condition.set_event_handler('change',self.right_boundary_condition_change)
-
+    
     # Iniate canvas drawing
     self.beamfigure_reset()
+
+    # Iniate progress bar
+    self.canvas_progress_width=self.canvas_progress.get_width()
+    self.canvas_progress_width=self.canvas_progress.get_height()
+    self.progress=0
 
     
   def beamfigure_reset(self, **event_args):
         """This method is called when the canvas is reset and cleared, such as when the window resizes, or the canvas is added to a form."""
         x_start, y_start, beam_length, beam_height = self.create_beam()
+        self.draw_boundary_conditions(x_start, y_start, beam_length, beam_height)
 
 
   def create_beam(self):
@@ -78,9 +86,9 @@ class beam(beamTemplate):
 
   def draw_boundary_conditions(self, x_start, y_start, beam_length, beam_height):
         conditions = {
-            "Free": self.draw_free,
             "Simply supported": self.draw_simply_supported,
-            "Fixed": self.draw_fixed
+            "Fixed": self.draw_fixed,  
+            "Free": self.draw_free,
         }
         
         # Draw left boundary condition
@@ -134,10 +142,30 @@ class beam(beamTemplate):
         return 's'
     elif condition == "Fixed":
         return 'f'
+
+  def draw_progress_bar(self, progress):
+        canvas = self.canvas_progress
+        canvas.clear()
+        
+        # 전체 바 그리기
+        canvas.fill_style = "#e0e0e0"
+        canvas.fill_rect(10, self.canvas_height - 30, self.canvas_width - 20, 20)
+        
+        # 진행된 부분 그리기
+        canvas.fill_style = "#76c7c0"
+        canvas.fill_rect(10, self.canvas_height - 30, (self.canvas_width - 20) * (progress / 100), 20)
+        
+        # 진행 상황 텍스트
+        canvas.fill_style = "#000000"
+        canvas.font = "16px Arial"
+        canvas.fill_text(f"{progress}%", self.canvas_width / 2 - 10, self.canvas_height - 35)
+
+  def update_progress_bar(self, progress):
+        self.progress = progress
+        self.draw_progress_bar(self.progress)
   
   def Input_click(self, **event_args):
     """This method is called when the button is clicked"""
-    
     left_condition=self.convert_boundary_condition_value(self.left_boundary_condition.selected_value)
     right_condition=self.convert_boundary_condition_value(self.right_boundary_condition.selected_value)
     self.E=self.input_E.text if self.input_E.text else '206e09'
@@ -148,6 +176,12 @@ class beam(beamTemplate):
     self.q=self.input_q.text if self.input_q.text else '0'
     self.lr=self.input_lr.text if self.input_lr.text else '0.2'
     self.epochs=self.input_epochs.text if self.input_epochs.text else '200'
+
+    self.task=anvil.server.launch_background_task('calculate_beam')
+    while self.task.is_running():
+            progress = self.task.get_progress()['progress']
+            self.update_progress_bar(progress)
+            time.sleep(0.1)
     
     anvil.server.call('initialize_beam_parameters',left_condition,right_condition, self.E, self.I, self.L, self.P,self.x_p,self.q,self.lr,self.epochs)
     img_media, result = anvil.server.call('calculate_beam')
