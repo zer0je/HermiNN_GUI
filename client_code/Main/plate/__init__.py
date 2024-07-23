@@ -18,13 +18,21 @@ class plate(plateTemplate):
     # Initialize dropdown menus
     self.boundary_condition.items = ["Clamped", "Simply supported"]
 
+    # Attach change event handler for boundary condition dropdown
+    self.boundary_condition.set_event_handler('change', self.boundary_condition_change)
+
     # Initialize plate
     self.platefigure_reset()
     self.canvas_progress_reset(0)
 
+  def boundary_condition_change(self, **event_args):
+        """This method is called when the selected value of the dropdown changes"""
+        self.platefigure_reset()
+
   def platefigure_reset(self, **event_args):
     """This method is called when the canvas is reset and cleared, such as when the window resizes, or the canvas is added to a form."""
-    self.create_plate()
+    x_start, y_start, plate_width, plate_height=self.create_plate()
+    self.draw_boundary_conditions(x_start, y_start, plate_width, plate_height)
 
   def create_plate(self):
     """This method is called when the canvas is reset and cleared, such as when the window resizes, or the canvas is added to a form."""
@@ -46,6 +54,104 @@ class plate(plateTemplate):
     # Set drawing style
     canvas.fill_style = "#000000"  # Black color
     canvas.fill_rect(x_start, y_start, plate_width, plate_height)
+
+    # Return plate position and dimensions
+    return x_start, y_start, plate_width, plate_height
+
+  def draw_boundary_conditions(self, x_start, y_start, plate_width, plate_height):
+        condition = self.boundary_condition.selected_value
+        if condition == "Clamped":
+            self.draw_clamped(x_start, y_start, plate_width, plate_height)
+        elif condition == "Simply supported":
+            self.draw_simply_supported(x_start, y_start, plate_width, plate_height)
+
+  def draw_clamped(self, x, y, plate_width, plate_height):
+        canvas = self.platefigure
+        canvas.stroke_style = "#000000"
+        
+        # Draw diagonal lines along the edges to indicate clamped condition
+        line_spacing = 10  # spacing between the lines
+        line_length = 10  # length of each line
+        corner_gap = 10  # gap at the corners
+    
+        # Top edge
+        for i in range(0, plate_width, line_spacing):
+            if i < corner_gap or i > plate_width - corner_gap - line_spacing:
+                continue
+            canvas.begin_path()
+            canvas.move_to(x + i, y)
+            canvas.line_to(x + i + line_length, y - line_length)
+            canvas.stroke()
+    
+        # Bottom edge
+        for i in range(0, plate_width, line_spacing):
+            if i < corner_gap or i > plate_width - corner_gap - line_spacing:
+                continue
+            canvas.begin_path()
+            canvas.move_to(x + i, y + plate_height)
+            canvas.line_to(x + i + line_length, y + plate_height + line_length)
+            canvas.stroke()
+    
+        # Left edge
+        for i in range(0, plate_height, line_spacing):
+            if i < corner_gap or i > plate_height - corner_gap - line_spacing:
+                continue
+            canvas.begin_path()
+            canvas.move_to(x, y + i)
+            canvas.line_to(x - line_length, y + i + line_length)
+            canvas.stroke()
+    
+        # Right edge
+        for i in range(0, plate_height, line_spacing):
+            if i < corner_gap or i > plate_height - corner_gap - line_spacing:
+                continue
+            canvas.begin_path()
+            canvas.move_to(x + plate_width, y + i)
+            canvas.line_to(x + plate_width + line_length, y + i + line_length)
+            canvas.stroke()
+
+  def draw_simply_supported(self, x, y, plate_width, plate_height):
+        canvas = self.platefigure
+        canvas.fill_style = "#000000"
+        
+        triangle_size = 8  # Adjust the size of the triangles
+        spacing = 20  # Adjust the spacing between triangles
+    
+        # Top edge
+        for i in range(5, plate_width, spacing):
+            canvas.begin_path()
+            canvas.move_to(x + i, y)
+            canvas.line_to(x + i - triangle_size, y - triangle_size)
+            canvas.line_to(x + i + triangle_size, y - triangle_size)
+            canvas.close_path()
+            canvas.fill()
+    
+        # Bottom edge
+        for i in range(1, plate_width, spacing):
+            canvas.begin_path()
+            canvas.move_to(x + i, y + plate_height)
+            canvas.line_to(x + i - triangle_size, y + plate_height + triangle_size)
+            canvas.line_to(x + i + triangle_size, y + plate_height + triangle_size)
+            canvas.close_path()
+            canvas.fill()
+    
+        # Left edge
+        for i in range(1, plate_height, spacing):
+            canvas.begin_path()
+            canvas.move_to(x, y + i)
+            canvas.line_to(x - triangle_size, y + i - triangle_size)
+            canvas.line_to(x - triangle_size, y + i + triangle_size)
+            canvas.close_path()
+            canvas.fill()
+    
+        # Right edge
+        for i in range(1, plate_height, spacing):
+            canvas.begin_path()
+            canvas.move_to(x + plate_width, y + i)
+            canvas.line_to(x + plate_width + triangle_size, y + i - triangle_size)
+            canvas.line_to(x + plate_width + triangle_size, y + i + triangle_size)
+            canvas.close_path()
+            canvas.fill()
 
   
   def convert_boundary_condition_value(self, condition):
