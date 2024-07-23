@@ -146,6 +146,7 @@ components:
   properties: {height: 100}
   type: Canvas
   layout_properties: {grid_position: 'VQOXAJ,CXTWMT'}
+  event_bindings: {reset: canvas_progress_reset}
 - name: image_beam_deflection
   properties: {visible: true}
   type: Image

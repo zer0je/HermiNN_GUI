@@ -26,6 +26,7 @@ class beam(beamTemplate):
     
     # Iniate canvas drawing
     self.beamfigure_reset()
+    self.canvas_progress_reset(0)
 
     
   def beamfigure_reset(self, **event_args):
@@ -151,37 +152,43 @@ class beam(beamTemplate):
     self.epochs=self.input_epochs.text if self.input_epochs.text else '200'
 
      # 백그라운드 태스크 시작
-    task = anvil.server.call(
-            'launch_calculate_beam_task', left_condition, right_condition, self.E, self.I, self.L, self.P, self.x_p, self.q, self.lr, int(self.epochs)
+    task_id = anvil.server.call(
+            'launch_calculate_beam', left_condition, right_condition, self.E, self.I, self.L, self.P, self.x_p, self.q, self.lr, int(self.epochs)
         )
 
      # 진행 상황 폴링
-    while task.is_running():
-            progress = task.get_state().get('progress',0)
-            self.update_progress_bar(progress)
-            time.sleep(0.1)
-
-    
+    while True:
+        progress_data = anvil.server.call('get_task_progress', task_id)
+        progress = progress_data.get('progress', 0)
+        self.canvas_progress_reset(progress)
+      
+        if not progress_data['running']:
+          img_media=progress_data['image']
+          result = progress_data['result_text']
+          break
+          
     #anvil.server.call('initialize_beam_parameters',left_condition,right_condition, self.E, self.I, self.L, self.P,self.x_p,self.q,self.lr,self.epochs)
     #img_media, result = anvil.server.call('calculate_beam')
-    img_media, result = task.get_return_value()
     self.image_beam_deflection.source = img_media
     self.image_beam_deflection.width = "1000px"  
     self.image_beam_deflection.height = "800px"
     self.text_result.text=result
     self.text_result.height = "110px"
 
-  def update_progress_bar(self, progress):
-        canvas = self.canvas_progress
-        canvas.begin_path()
-        canvas.fill_style = "#e0e0e0"
-        canvas.fill_rect(10, self.canvas_progress.get_height() - 30, self.canvas_progress.get_width() - 20, 20)
-        canvas.fill_style = "#76c7c0"
-        canvas.fill_rect(10, self.canvas_progress.get_height() - 30, (self.canvas_progress.get_width() - 20) * (progress / 100), 20)
-        canvas.fill_style = "#000000"
-        canvas.font = "16px Arial"
-        canvas.fill_text(f"{int(progress)}%", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
-    
+  def canvas_progress_reset(self, progress=0,**event_args):
+    """This method is called when the canvas is reset and cleared, such as when the window resizes, or the canvas is added to a form."""
+    canvas = self.canvas_progress
+    canvas.clear_rect(0, 0, canvas.get_width(), canvas.get_height())
+    canvas.begin_path()
+    canvas.fill_style = "#e0e0e0"
+    canvas.fill_rect(10, self.canvas_progress.get_height() - 30, self.canvas_progress.get_width() - 20, 20)
+    canvas.fill_style = "#76c7c0"
+    canvas.fill_rect(10, self.canvas_progress.get_height() - 30, (self.canvas_progress.get_width() - 20) * (progress / 100), 20)
+    canvas.fill_style = "#000000"
+    canvas.font = "16px Arial"
+    canvas.fill_text(f"{int(progress)}/{self.input_epochs.text}", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
+
+
 
 
 
