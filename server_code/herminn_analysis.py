@@ -148,27 +148,34 @@ class HiNet_hermit(nn.Module):
         #print(dof_counter)
         return total_output
 
+#------------------------------------------------------------------------------
+# 진행 상황 및 결과 호출
+
+@anvil.server.callable
+def get_task_progress(task_id):
+    task = anvil.server.get_background_task(task_id)
+    state = task.get_state() if task.get_state() is not None else {}
+    progress = state.get('progress', 0)
+    if task.is_running():
+        return {
+            'running': True,
+            'progress': progress,
+            'result_text': None
+        }
+    else:
+        return {
+            'running': False,
+            'progress': progress,
+            'result_text': state.get('result_text')
+        }
+
+@anvil.server.callable
+def create_image(image_path):
+    return anvil.media.from_file(image_path, 'image/png')
+
 
 #-------------------------------------------------------------------------------
 # Beam Anlaysis
-beam_parameters = {}  # 전역 변수로 선언
-
-@anvil.server.callable
-def initialize_beam_parameters(left_condition,right_condition,E, I, L, P,x_p,q,lr,epochs):
-    global beam_parameters
-    beam_parameters = {
-        'left_condition': left_condition,
-        'right_condition': right_condition,
-        'E': E,
-        'I': I,
-        'L': L,
-        'P': P,
-        'x_p': x_p,
-        'q': q,
-        'lr': lr,
-        'epochs':epochs
-    }
-
 
 # 2nd order derivative in x axis
 def dw_2(x, w):
@@ -188,21 +195,29 @@ def TPE_EB(x, w,E,I,L,P,x_p,q):
 
 
 @anvil.server.callable
-def calculate_beam():
+def launch_calculate_beam(left_condition, right_condition, E, I, L, P, x_p, q, lr, num_epochs):
+    task = anvil.server.launch_background_task(
+        'calculate_beam', left_condition, right_condition, E, I, L, P, x_p, q, lr, num_epochs
+    )
+    return task.get_id()
+
+@anvil.server.background_task
+def calculate_beam(left_condition, right_condition, E, I, L, P, x_p, q, lr, num_epochs):
   # Proplem Statement for Euler Beam
-  left_condition=beam_parameters.get('left_condition')
-  right_condition=beam_parameters.get('right_condition')
-  E = float(beam_parameters.get('E'))
-  I = float(beam_parameters.get('I'))
-  L = float(beam_parameters.get('L'))
-  P = float(beam_parameters.get('P'))
-  x_p=float(beam_parameters.get('x_p'))
-  q=float(beam_parameters.get('q'))
-  lr = float(beam_parameters.get('lr'))
-  num_epochs = int(beam_parameters.get('epochs'))
+  left_condition=left_condition
+  right_condition=right_condition
+  E = float(E)
+  I = float(I)
+  L = float(L)
+  P = float(P)
+  x_p=float(x_p)
+  q=float(q)
+  lr = float(lr)
+  num_epochs = int(num_epochs)
+
 
   # Initializing HermiNN
-  model = HiNet_hermit(0, L, 2, left_condition, right_condition)
+  model = HiNet_hermit(0, L, 3, left_condition, right_condition)
 
   # Sampling coordinate data
   data = torch.linspace(0, L, 1000).unsqueeze(1)  # 입력 크기에 맞게 reshape
@@ -223,6 +238,9 @@ def calculate_beam():
       loss = U + V
       loss.backward()
       optimizer.step()
+
+      # update progress
+      anvil.server.task_state['progress'] = (epoch + 1) 
 
   end_time_ml = time.time()
 
@@ -252,9 +270,9 @@ def calculate_beam():
     elif left_condition == 'f' and right_condition == 'f':
         for i in range(len(x)):
             if x[i] < x_p:
-                w[i] = (P * x[i]**2 / (24 * E * I)) * (6 * L * x_p - 4 * L * x[i] + x_p * (L - x_p) - x[i] * (L - x_p))+(q / (24 * E * I)) * x[i]**2 * (6*L**2 - 4*L*x[i] + x[i]**2)
+                w[i] = (2*P * (L-x_p)**2*x[i]**2 / (12 * E * I*L**3)) * (3*x_p*L-3*x_p*x[i]-(L-x_p)*x[i])+(q / (24 * E * I)) * x[i]**2 * (L-x[i])**2
             else:
-                w[i] = (P * x_p**2 / (24 * E * I)) * (4 * L * x[i] - x_p * (L - x_p) - 6 * L * x_p + x_p * (L - x_p) + x[i] * (L - x_p))+(q / (24 * E * I)) * x[i]**2 * (6*L**2 - 4*L*x[i] + x[i]**2)
+                w[i] = (2*P * (x_p)**2*(L-x[i])**2 / (12 * E * I*L**3)) * (3*(L-x_p)*L-3*(L-x_p)*(L-x[i])-x_p*(L-x[i]))+(q / (24 * E * I)) * x[i]**2 * (L-x[i])**2
 
 
     # Simply Supported-Simply Supported
@@ -316,33 +334,20 @@ def calculate_beam():
   plt.savefig(image_path)
 
    # save text result
-  result = (
+  result_text = (
         f"Learned Solution:\n"
         f"MAE: {mse_ml**(1/2):.4f}\n"
         f"R^2: {r2_ml:.4f}\n"
         f"Time Consumed: {end_time_ml - start_time_ml:.4f} seconds\n"
     )
-
-  return anvil.media.from_file(image_path, "image/png"), result
+  
+  # update text
+  anvil.server.task_state.update({
+        'result_text': result_text
+    })
 
 #-------------------------------------------------------------------------------
 # Plate Analysis
-plate_parameters = {}
-
-@anvil.server.callable
-def initialize_plate_parameters(boundary_condition,E,mu,a,b,h,q,lr,epochs):
-    global plate_parameters
-    plate_parameters = {
-        'boundary_condition': boundary_condition,
-        'E': E,
-        'mu': mu,
-        'a': a,
-        'b': b,
-        'h': h,
-        'q': q,
-        'lr': lr,
-        'epochs':epochs
-    }
 
 # Data Sampling Function
 def train_data_grid(Nx, Ny):
@@ -442,19 +447,26 @@ def TPE_FvK(xy, u, v, w,mu,D,C,q):
 
     return torch.mean(U_m), torch.mean(U_b), torch.mean(U_e)
 
-
 @anvil.server.callable
-def calculate_plate():
+def launch_calculate_plate(boundary_condition, E, mu, W, H, t, q, lr, num_epochs):
+    task = anvil.server.launch_background_task(
+        'calculate_plate', boundary_condition, E, mu, W, H, t, q, lr, num_epochs
+    )
+    return task.get_id()
+
+
+@anvil.server.background_task
+def calculate_plate(boundary_condition, E, mu, W, H, t, q, lr, num_epochs):
   # Proplem Statement for Plate
-  boundary_condition=plate_parameters.get('boundary_condition')
-  E = float(plate_parameters.get('E'))
-  mu = float(plate_parameters.get('mu'))
-  a = float(plate_parameters.get('a'))
-  b = float(plate_parameters.get('b'))
-  h=float(plate_parameters.get('h'))
-  q=float(plate_parameters.get('q'))
-  lr = float(plate_parameters.get('lr'))
-  num_epochs = int(plate_parameters.get('epochs'))
+  boundary_condition=boundary_condition
+  E = float(E)
+  mu = float(mu)
+  a = float(W)/2
+  b = float(H)/2
+  h=float(t)
+  q=float(q)
+  lr = float(lr)
+  num_epochs = int(num_epochs)
   D = E*(h**3)/(12*(1-mu**2))
   C = E*h / (1-mu**2)
 
@@ -502,7 +514,6 @@ def calculate_plate():
 
   start_time_ml = time.time()
 
-
   for epoch in range(num_epochs):
       optimizer.zero_grad()
       u = Net_u(data)
@@ -516,6 +527,9 @@ def calculate_plate():
       if (epoch + 1) % 1 == 0:
           data = train_data(num_sample_points, seed)
           seed += 1
+      # update progress
+      anvil.server.task_state['progress'] = (epoch + 1)
+
 
   end_time_ml = time.time()
 
@@ -536,6 +550,7 @@ def calculate_plate():
   U = u.reshape(X.shape)
   V = v.reshape(X.shape)
   W = w.reshape(X.shape)
+
 
 
   # Plotting 3D deflection
@@ -576,16 +591,21 @@ def calculate_plate():
   plt.savefig(image_2d_path)
 
   # save text result
-
-  result = (
+  result_text = (
         f"Time Consumed: {end_time_ml - start_time_ml}\n"
         f"Maximum deflection: {max(Net_w(data).detach().numpy())*1000:.4f}mm\n"
     )
 
-  return anvil.media.from_file(image_3d_path, "image_3d/png"),anvil.media.from_file(image_2d_path, "image_2d/png"), result
+  # update text
+  anvil.server.task_state.update({
+        'result_text': result_text
+    })
 
 
 
 # 서버가 종료되지 않고 계속 실행되도록 설정
 anvil.server.wait_forever()
+
+
+
 
