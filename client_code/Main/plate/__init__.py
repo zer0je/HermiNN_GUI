@@ -89,8 +89,8 @@ class plate(plateTemplate):
     self.image_plate_deflection.height = "800px"
 
     self.image_plate_displacement.source = image_2d
-    self.image_plate_displacement.width = "1000px"
-    self.image_plate_displacement.height = "800px"
+    self.image_plate_displacement.width = "990px"
+    self.image_plate_displacement.height = "400px"
     self.text_result.text = result_text
     self.text_result.height = "110px"
 
