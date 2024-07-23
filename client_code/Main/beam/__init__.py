@@ -163,16 +163,16 @@ class beam(beamTemplate):
         self.canvas_progress_reset(progress)
       
         if not progress_data['running']:
-          img_media=progress_data['image']
-          result = progress_data['result_text']
+          result_text = progress_data['result_text']
           break
           
     #anvil.server.call('initialize_beam_parameters',left_condition,right_condition, self.E, self.I, self.L, self.P,self.x_p,self.q,self.lr,self.epochs)
     #img_media, result = anvil.server.call('calculate_beam')
-    self.image_beam_deflection.source = img_media
+    image_media=anvil.server.call('create_image')
+    self.image_beam_deflection.source = image_media
     self.image_beam_deflection.width = "1000px"  
     self.image_beam_deflection.height = "800px"
-    self.text_result.text=result
+    self.text_result.text=result_text
     self.text_result.height = "110px"
 
   def canvas_progress_reset(self, progress=0,**event_args):
@@ -183,7 +183,7 @@ class beam(beamTemplate):
     canvas.fill_style = "#e0e0e0"
     canvas.fill_rect(10, self.canvas_progress.get_height() - 30, self.canvas_progress.get_width() - 20, 20)
     canvas.fill_style = "#76c7c0"
-    canvas.fill_rect(10, self.canvas_progress.get_height() - 30, (self.canvas_progress.get_width() - 20) * (progress / 100), 20)
+    canvas.fill_rect(10, self.canvas_progress.get_height() - 30, (self.canvas_progress.get_width() - 20) * (progress /float(self.input_epochs.text) ), 20)
     canvas.fill_style = "#000000"
     canvas.font = "16px Arial"
     canvas.fill_text(f"{int(progress)}/{self.input_epochs.text}", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
