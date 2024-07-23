@@ -168,7 +168,7 @@ class beam(beamTemplate):
           
     #anvil.server.call('initialize_beam_parameters',left_condition,right_condition, self.E, self.I, self.L, self.P,self.x_p,self.q,self.lr,self.epochs)
     #img_media, result = anvil.server.call('calculate_beam')
-    image_media=anvil.server.call('create_image')
+    image_media=anvil.server.call('create_image',"/tmp/beam_plot.png")
     self.image_beam_deflection.source = image_media
     self.image_beam_deflection.width = "1000px"  
     self.image_beam_deflection.height = "800px"

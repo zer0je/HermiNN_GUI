@@ -20,6 +20,7 @@ class plate(plateTemplate):
 
     # Initialize plate
     self.platefigure_reset()
+    self.canvas_progress_reset(0)
 
   def platefigure_reset(self, **event_args):
     """This method is called when the canvas is reset and cleared, such as when the window resizes, or the canvas is added to a form."""
@@ -65,18 +66,50 @@ class plate(plateTemplate):
     self.lr = self.input_lr.text if self.input_lr.text else "0.01"
     self.epochs = self.input_epochs.text if self.input_epochs.text else "210"
 
-    anvil.server.call("initialize_plate_parameters",boundary_condition,self.E,self.mu,self.W,self.H,self.t,self.q,self.lr,self.epochs,)
+    # 백그라운드 태스크 시작
+    task_id = anvil.server.call(
+            'launch_calculate_plate', boundary_condition,self.E,self.mu,self.W,self.H,self.t,self.q,self.lr, int(self.epochs)
+        )
     
-    img_3d, img_2d, result = anvil.server.call("calculate_plate")
-    self.image_plate_deflection.source = img_3d
+    # 진행 상황 폴링
+    while True:
+        progress_data = anvil.server.call('get_task_progress', task_id)
+        progress = progress_data.get('progress', 0)
+        self.canvas_progress_reset(progress)
+      
+        if not progress_data['running']:
+          result_text = progress_data['result_text']
+          break
+
+    
+    image_3d=anvil.server.call('create_image',"/tmp/plate_3d_plot.png")
+    image_2d=anvil.server.call('create_image',"/tmp/plate_2d_plot.png")
+    self.image_plate_deflection.source = image_3d
     self.image_plate_deflection.width = "1000px"
     self.image_plate_deflection.height = "800px"
 
-    self.image_plate_displacement.source = img_2d
+    self.image_plate_displacement.source = image_2d
     self.image_plate_displacement.width = "1000px"
     self.image_plate_displacement.height = "800px"
-    self.text_result.text = result
+    self.text_result.text = result_text
     self.text_result.height = "110px"
+
+  def canvas_progress_reset(self, progress=0,**event_args):
+    """This method is called when the canvas is reset and cleared, such as when the window resizes, or the canvas is added to a form."""
+    canvas = self.canvas_progress
+    canvas.clear_rect(0, 0, canvas.get_width(), canvas.get_height())
+    canvas.begin_path()
+    canvas.fill_style = "#e0e0e0"
+    canvas.fill_rect(10, self.canvas_progress.get_height() - 30, self.canvas_progress.get_width() - 20, 20)
+    canvas.fill_style = "#76c7c0"
+    canvas.fill_rect(10, self.canvas_progress.get_height() - 30, (self.canvas_progress.get_width() - 20) * (progress /float(self.input_epochs.text) ), 20)
+    canvas.fill_style = "#000000"
+    canvas.font = "16px Arial"
+    canvas.fill_text(f"{int(progress)}/{self.input_epochs.text}", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
+
+
+
+  
 
 
 
