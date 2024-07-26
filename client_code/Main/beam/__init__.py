@@ -59,8 +59,8 @@ class beam(beamTemplate):
         # Draw arrow indicating direction (rightward arrow at the end of the beam)
         arrow_length = 80
         arrow_height = 20
-        x_arrow_start = x_start - arrow_length
-        y_arrow_start = y_start + beam_height-45
+        x_arrow_start = x_start + beam_length
+        y_arrow_start = y_start + beam_height / 2
 
         canvas.stroke_style = "#000000"
         canvas.begin_path()
@@ -75,6 +75,23 @@ class beam(beamTemplate):
         canvas.fill_style = "#000000"
         canvas.font = "14px Arial"
         canvas.fill_text("x", x_arrow_start + arrow_length + 10, y_arrow_start + 5)
+
+        # Draw vertical z-axis at the left end of the beam
+        z_arrow_length = 80
+        z_arrow_height = 20
+        z_arrow_start_x = x_start
+        z_arrow_start_y = y_start + beam_height / 2
+    
+        canvas.begin_path()
+        canvas.move_to(z_arrow_start_x, z_arrow_start_y)
+        canvas.line_to(z_arrow_start_x, z_arrow_start_y - z_arrow_length)
+        canvas.line_to(z_arrow_start_x - z_arrow_height / 2, z_arrow_start_y - z_arrow_length + z_arrow_height / 2)
+        canvas.move_to(z_arrow_start_x, z_arrow_start_y - z_arrow_length)
+        canvas.line_to(z_arrow_start_x + z_arrow_height / 2, z_arrow_start_y - z_arrow_length + z_arrow_height / 2)
+        canvas.stroke()
+        
+        # Draw z-axis label
+        canvas.fill_text("z", z_arrow_start_x - 10, z_arrow_start_y - z_arrow_length - 10)
 
         # Return beam position and dimensions
         return x_start, y_start, beam_length, beam_height
