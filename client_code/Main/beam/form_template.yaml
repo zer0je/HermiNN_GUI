@@ -46,7 +46,7 @@ components:
     properties: {text: 'Young''s Modulus (E) [Pa]', align: center, bold: true}
     type: Label
 - name: input_E
-  properties: {text: '206e09'}
+  properties: {text: '1'}
   type: TextBox
   layout_properties: {grid_position: 'CELUKQ,KWEKXS'}
   event_bindings: {pressed_enter: text_box_1_pressed_enter}
@@ -59,7 +59,7 @@ components:
     properties: {text: 'Moment of Inertia (I) [m^4]', align: center, bold: true}
     type: Label
 - name: input_I
-  properties: {text: '1000'}
+  properties: {text: '1'}
   type: TextBox
   layout_properties: {grid_position: 'QNNTCN,ZIIYLP'}
 - name: linear_panel_3
@@ -71,7 +71,7 @@ components:
     properties: {text: 'Length (L) [m]', align: center, bold: true}
     type: Label
 - name: input_L
-  properties: {text: '10'}
+  properties: {text: '1'}
   type: TextBox
   layout_properties: {grid_position: 'DNYHSE,WBGVUD'}
 - name: linear_panel_4
@@ -83,7 +83,7 @@ components:
     properties: {text: 'Point Load (P) [N]', align: center, bold: true}
     type: Label
 - name: input_P
-  properties: {text: '100'}
+  properties: {text: '1'}
   type: TextBox
   layout_properties: {grid_position: 'PKNCCO,GVCOSR'}
 - name: linear_panel_5
@@ -96,7 +96,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_x_p
-  properties: {text: '5'}
+  properties: {text: '1'}
   type: TextBox
   layout_properties: {grid_position: 'RCXHGM,WDJEHV'}
 - name: linear_panel_6
@@ -121,7 +121,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_lr
-  properties: {text: '0.5'}
+  properties: {text: '0.1'}
   type: TextBox
   layout_properties: {grid_position: 'RGENGQ,AUVCWA'}
 - name: linear_panel_8
@@ -134,7 +134,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_epochs
-  properties: {underline: false, text: '1000'}
+  properties: {underline: false, text: '10'}
   type: TextBox
   layout_properties: {grid_position: 'LTOXEL,NTBECJ'}
 - name: Input

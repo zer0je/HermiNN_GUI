@@ -84,14 +84,14 @@ class beam(beamTemplate):
     
         canvas.begin_path()
         canvas.move_to(z_arrow_start_x, z_arrow_start_y)
-        canvas.line_to(z_arrow_start_x, z_arrow_start_y - z_arrow_length)
-        canvas.line_to(z_arrow_start_x - z_arrow_height / 2, z_arrow_start_y - z_arrow_length + z_arrow_height / 2)
-        canvas.move_to(z_arrow_start_x, z_arrow_start_y - z_arrow_length)
-        canvas.line_to(z_arrow_start_x + z_arrow_height / 2, z_arrow_start_y - z_arrow_length + z_arrow_height / 2)
+        canvas.line_to(z_arrow_start_x, z_arrow_start_y + z_arrow_length)
+        canvas.line_to(z_arrow_start_x - z_arrow_height / 2, z_arrow_start_y + z_arrow_length - z_arrow_height / 2)
+        canvas.move_to(z_arrow_start_x, z_arrow_start_y + z_arrow_length)
+        canvas.line_to(z_arrow_start_x + z_arrow_height / 2, z_arrow_start_y + z_arrow_length - z_arrow_height / 2)
         canvas.stroke()
         
         # Draw z-axis label
-        canvas.fill_text("z", z_arrow_start_x - 10, z_arrow_start_y - z_arrow_length - 10)
+        canvas.fill_text("z", z_arrow_start_x - 10, z_arrow_start_y + z_arrow_length + 20)
 
         # Return beam position and dimensions
         return x_start, y_start, beam_length, beam_height
@@ -159,14 +159,14 @@ class beam(beamTemplate):
     """This method is called when the button is clicked"""
     left_condition=self.convert_boundary_condition_value(self.left_boundary_condition.selected_value)
     right_condition=self.convert_boundary_condition_value(self.right_boundary_condition.selected_value)
-    self.E=self.input_E.text if self.input_E.text else '206e09'
-    self.I=self.input_I.text if self.input_I.text else '1000'
-    self.L=self.input_L.text if self.input_L.text else '10'
+    self.E=self.input_E.text if self.input_E.text else '1'
+    self.I=self.input_I.text if self.input_I.text else '1'
+    self.L=self.input_L.text if self.input_L.text else '1'
     self.P=self.input_P.text if self.input_P.text else '0'
     self.x_p=self.input_x_p.text if self.input_x_p.text else '0'
     self.q=self.input_q.text if self.input_q.text else '0'
-    self.lr=self.input_lr.text if self.input_lr.text else '0.2'
-    self.epochs=self.input_epochs.text if self.input_epochs.text else '200'
+    self.lr=self.input_lr.text if self.input_lr.text else '0.1'
+    self.epochs=self.input_epochs.text if self.input_epochs.text else '10'
 
      # 백그라운드 태스크 시작
     task_id = anvil.server.call(

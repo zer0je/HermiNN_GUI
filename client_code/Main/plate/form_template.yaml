@@ -15,7 +15,7 @@ components:
   layout_properties: {grid_position: 'GATVPM,MMZIPX', full_width_row: true}
   event_bindings: {reset: platefigure_reset}
 - name: label_boundarycondition
-  properties: {text: Boundary Condition, align: center, bold: true, underline: false, visible: true, icon: '', italic: false}
+  properties: {text: Boundary Condition, align: center, bold: true, underline: false, visible: true, icon: '', italic: false, font_size: 16}
   type: Label
   layout_properties: {grid_position: 'QJOPZN,HSOBGT', full_width_row: true, row_background: 'theme:Disabled Container'}
 - name: boundary_condition
@@ -98,7 +98,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_q
-  properties: {text: '10'}
+  properties: {text: '1'}
   type: TextBox
   layout_properties: {grid_position: 'ZNGNIB,MCZKFT'}
 - name: linear_panel_7
@@ -111,7 +111,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_lr
-  properties: {text: '0.01'}
+  properties: {text: '0.5'}
   type: TextBox
   layout_properties: {grid_position: 'RGENGQ,AUVCWA'}
 - name: linear_panel_8
@@ -124,7 +124,7 @@ components:
     type: Label
     layout_properties: {}
 - name: input_epochs
-  properties: {underline: false, text: '200'}
+  properties: {underline: false, text: '5'}
   type: TextBox
   layout_properties: {grid_position: 'LTOXEL,NTBECJ'}
 - name: Input
