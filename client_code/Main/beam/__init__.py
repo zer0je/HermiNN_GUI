@@ -180,15 +180,13 @@ class beam(beamTemplate):
         self.canvas_progress_reset(progress)
       
         if not progress_data['running']:
-          result_text = progress_data['result_text']
+          self.model_path=progress_data['model_path']
           break
           
     image_media=anvil.server.call('create_image',"/tmp/beam_plot.png")
     self.image_beam_deflection.source = image_media
     self.image_beam_deflection.width = "1000px"  
     self.image_beam_deflection.height = "800px"
-    self.text_result.text=result_text
-    self.text_result.height = "110px"
 
   def canvas_progress_reset(self, progress=0,**event_args):
     """This method is called when the canvas is reset and cleared, such as when the window resizes, or the canvas is added to a form."""
@@ -206,7 +204,10 @@ class beam(beamTemplate):
   def input_x_pressed_enter(self, **event_args):
     """This method is called when the user presses Enter in this text box"""
     self.x=self.input_x.text if self.input_E.text else '1'
-    anvil.server.call()
+    w=anvil.server.call('cal_w_at_x',self.model_path,self.x)
+    self.output_w.text=w
+    
+    
 
 
 
