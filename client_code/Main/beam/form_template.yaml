@@ -138,7 +138,7 @@ components:
   type: TextBox
   layout_properties: {grid_position: 'LTOXEL,NTBECJ'}
 - name: Input
-  properties: {text: Input, bold: true, font_size: 20}
+  properties: {text: Calculate, bold: true, font_size: 20}
   type: Button
   layout_properties: {grid_position: 'KDMNCC,WGAMZI', row_background: '', full_width_row: true}
   event_bindings: {click: Input_click}
