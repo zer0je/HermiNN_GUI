@@ -21,8 +21,9 @@ components:
 - name: boundary_condition
   properties:
     items: [Clamped, Simply supported]
+    align: full
   type: DropDown
-  layout_properties: {grid_position: 'GTYBUY,PJSGAB', full_width_row: true}
+  layout_properties: {grid_position: 'GTYBUY,PJSGAB', full_width_row: true, row_background: 'theme:Dark Overlay 1'}
 - name: linear_panel_1
   properties: {}
   type: LinearPanel

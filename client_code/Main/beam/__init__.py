@@ -17,8 +17,8 @@ class beam(beamTemplate):
     self.Input.background = "#CED8F6"
 
     # Initialize dropdown menus
-    self.left_boundary_condition.items = [ "Simply supported", "Fixed","Free"]
-    self.right_boundary_condition.items = [ "Simply supported", "Fixed","Free"]
+    self.left_boundary_condition.items = [ "Pinned", "Fixed","Free"]
+    self.right_boundary_condition.items = [ "Pinned", "Fixed","Free"]
 
     # Attach change event handlers
     self.left_boundary_condition.set_event_handler('change',self.left_boundary_condition_change)
@@ -53,7 +53,7 @@ class beam(beamTemplate):
         y_start = height / 2 - beam_height / 2
 
         # Set drawing style
-        canvas.fill_style = "#000000"  # Black color
+        canvas.fill_style = "#000089"  
         canvas.fill_rect(x_start, y_start, beam_length, beam_height)
 
         # Draw arrow indicating direction (rightward arrow at the end of the beam)
@@ -91,14 +91,14 @@ class beam(beamTemplate):
         canvas.stroke()
         
         # Draw z-axis label
-        canvas.fill_text("z", z_arrow_start_x - 10, z_arrow_start_y + z_arrow_length + 20)
+        canvas.fill_text("z", z_arrow_start_x-2 , z_arrow_start_y + z_arrow_length + 20)
 
         # Return beam position and dimensions
         return x_start, y_start, beam_length, beam_height
 
   def draw_boundary_conditions(self, x_start, y_start, beam_length, beam_height):
         conditions = {
-            "Simply supported": self.draw_simply_supported,
+            "Pinned": self.draw_simply_supported,
             "Fixed": self.draw_fixed,  
             "Free": self.draw_free,
         }
@@ -150,7 +150,7 @@ class beam(beamTemplate):
   def convert_boundary_condition_value(self,condition):
     if condition == "Free":
         return 'x'
-    elif condition == "Simply supported":
+    elif condition == "Pinned":
         return 's'
     elif condition == "Fixed":
         return 'f'

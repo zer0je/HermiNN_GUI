@@ -52,8 +52,55 @@ class plate(plateTemplate):
     y_start = (height - plate_height) / 2
 
     # Set drawing style
-    canvas.fill_style = "#000000"  # Black color
+    canvas.fill_style = "#D3D3D3"  
     canvas.fill_rect(x_start, y_start, plate_width, plate_height)
+    # Draw x-axis
+    x_axis_length = plate_width / 2
+    x_axis_start_x = x_start + plate_width / 2
+    x_axis_start_y = y_start + plate_height / 2
+    x_axis_end_x = x_axis_start_x + x_axis_length
+
+    canvas.stroke_style = "#000000"  
+    canvas.begin_path()
+    canvas.move_to(x_axis_start_x, x_axis_start_y)
+    canvas.line_to(x_axis_end_x, x_axis_start_y)
+    canvas.stroke()
+
+    # Draw x-axis arrow
+    arrow_size = 10
+    canvas.begin_path()
+    canvas.move_to(x_axis_end_x, x_axis_start_y)
+    canvas.line_to(x_axis_end_x - arrow_size, x_axis_start_y - arrow_size / 2)
+    canvas.move_to(x_axis_end_x, x_axis_start_y)
+    canvas.line_to(x_axis_end_x - arrow_size, x_axis_start_y + arrow_size / 2)
+    canvas.stroke()
+
+    # Draw x-axis label
+    canvas.fill_style = "#000000"  # Black color for text
+    canvas.font = "14px Arial"
+    canvas.fill_text("x", x_axis_end_x -10, x_axis_start_y +15)
+
+    # Draw y-axis
+    y_axis_length = plate_height / 2
+    y_axis_start_x = x_start + plate_width / 2
+    y_axis_start_y = y_start + plate_height / 2
+    y_axis_end_y = y_axis_start_y - y_axis_length
+
+    canvas.begin_path()
+    canvas.move_to(y_axis_start_x, y_axis_start_y)
+    canvas.line_to(y_axis_start_x, y_axis_end_y)
+    canvas.stroke()
+
+    # Draw y-axis arrow
+    canvas.begin_path()
+    canvas.move_to(y_axis_start_x, y_axis_end_y)
+    canvas.line_to(y_axis_start_x - arrow_size / 2, y_axis_end_y + arrow_size)
+    canvas.move_to(y_axis_start_x, y_axis_end_y)
+    canvas.line_to(y_axis_start_x + arrow_size / 2, y_axis_end_y + arrow_size)
+    canvas.stroke()
+
+    # Draw y-axis label
+    canvas.fill_text("y", y_axis_start_x-15, y_axis_end_y +15)
 
     # Return plate position and dimensions
     return x_start, y_start, plate_width, plate_height
@@ -68,11 +115,12 @@ class plate(plateTemplate):
   def draw_clamped(self, x, y, plate_width, plate_height):
         canvas = self.platefigure
         canvas.stroke_style = "#000000"
+        canvas.line_width = 3
         
         # Draw diagonal lines along the edges to indicate clamped condition
         line_spacing = 10  # spacing between the lines
         line_length = 10  # length of each line
-        corner_gap = 10  # gap at the corners
+        corner_gap = 0  # gap at the corners
     
         # Top edge
         for i in range(0, plate_width, line_spacing):

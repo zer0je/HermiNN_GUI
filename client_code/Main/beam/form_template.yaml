@@ -24,7 +24,7 @@ components:
   layout_properties: {grid_position: 'QJOPZN,IHTGXQ', row_background: 'theme:On Disabled'}
 - name: left_boundary_condition
   properties:
-    items: [Simply Supported, Fixed, Free]
+    items: [Pinned, Fixed, Free]
     include_placeholder: false
   type: DropDown
   layout_properties: {grid_position: 'VVSUVI,IHTHIX', full_width_row: true}
@@ -32,7 +32,7 @@ components:
   event_bindings: {change: left_boundary_condition_change}
 - name: right_boundary_condition
   properties:
-    items: [Simply Supported, Fixed, Free]
+    items: [Pinned, Fixed, Free]
     align: full
   type: DropDown
   layout_properties: {grid_position: 'VVSUVI,CBFZZZ'}
@@ -123,7 +123,7 @@ components:
 - name: input_lr
   properties: {text: '0.1'}
   type: TextBox
-  layout_properties: {grid_position: 'RGENGQ,AUVCWA'}
+  layout_properties: {grid_position: 'RGENGQ,AUVCWA', row_background: '', full_width_row: false}
 - name: linear_panel_8
   properties: {}
   type: LinearPanel
