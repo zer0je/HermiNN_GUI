@@ -189,14 +189,10 @@ class plate(plateTemplate):
 
     
     image_3d=anvil.server.call('create_image',"/tmp/plate_3d_plot.png")
-    image_2d=anvil.server.call('create_image',"/tmp/plate_2d_plot.png")
     self.image_plate_deflection.source = image_3d
     self.image_plate_deflection.width = "1000px"
     self.image_plate_deflection.height = "800px"
-
-    self.image_plate_displacement.source = image_2d
-    self.image_plate_displacement.width = "990px"
-    self.image_plate_displacement.height = "400px"
+    
     self.text_result.text = result_text
     self.text_result.height = "110px"
 
