@@ -203,6 +203,11 @@ class beam(beamTemplate):
     canvas.font = "16px Arial"
     canvas.fill_text(f"{int(progress)}/{self.input_epochs.text}", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
 
+  def input_x_pressed_enter(self, **event_args):
+    """This method is called when the user presses Enter in this text box"""
+    self.x=self.input_x.text if self.input_E.text else '1'
+    anvil.server.call()
+
 
 
 
