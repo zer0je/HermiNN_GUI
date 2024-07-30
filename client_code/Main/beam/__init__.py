@@ -180,7 +180,7 @@ class beam(beamTemplate):
         self.canvas_progress_reset(progress)
       
         if not progress_data['running']:
-          self.model_path=progress_data['model_path']
+          result_text = progress_data['result_text']
           break
           
     image_media=anvil.server.call('create_image',"/tmp/beam_plot.png")
