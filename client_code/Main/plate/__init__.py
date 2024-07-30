@@ -5,6 +5,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import plotly.graph_objects as go
 import anvil.server
+import anvil.media
 
 
 class plate(plateTemplate):
@@ -14,6 +15,7 @@ class plate(plateTemplate):
 
     # Set Color
     self.Input.background = "#CED8F6"
+    self.button_media.background = "#CED8F6"
 
     # Initialize dropdown menus
     self.boundary_condition.items = ["Clamped", "Simply supported"]
@@ -236,12 +238,7 @@ class plate(plateTemplate):
           break
 
     
-    #image_3d=anvil.server.call('create_image',"/tmp/plate_3d_plot.png")
-    #self.image_plate_deflection.source = image_3d
-    #self.image_plate_deflection.width = "1000px"
-    #elf.image_plate_deflection.height = "800px"
-
-    image_3d=anvil.server.call('create_html',"/tmp/plate_3d_plot.html")
+    image_3d=anvil.server.call('create_image',"/tmp/plate_3d_plot.png")
     self.image_plate_deflection.source = image_3d
     self.image_plate_deflection.width = "1000px"
     self.image_plate_deflection.height = "800px"
@@ -249,6 +246,10 @@ class plate(plateTemplate):
     self.text_result.text = result_text
     self.text_result.height = "110px"
 
+    
+
+
+    
   def canvas_progress_reset(self, progress=0,**event_args):
     """This method is called when the canvas is reset and cleared, such as when the window resizes, or the canvas is added to a form."""
     canvas = self.canvas_progress
@@ -261,6 +262,17 @@ class plate(plateTemplate):
     canvas.fill_style = "#000000"
     canvas.font = "16px Arial"
     canvas.fill_text(f"{int(progress)}/{self.input_epochs.text}", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
+
+  def load_html_file(self, **event_args):
+        # 서버에서 HTML 파일을 받아오기
+        html_media = anvil.server.call('create_html', "/tmp/plate_3d_plot.html")
+        # HTML 파일을 Image 컴포넌트에 설정
+        self.html_plate_deflection.source = html_media
+    
+  def button_media_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.load_html_file()
+
 
 
 
