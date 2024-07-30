@@ -6,6 +6,7 @@ from anvil.tables import app_tables
 import plotly.graph_objects as go
 import anvil.server
 import anvil.media
+import base64
 
 
 class plate(plateTemplate):
@@ -22,6 +23,11 @@ class plate(plateTemplate):
 
     # Attach change event handler for boundary condition dropdown
     self.boundary_condition.set_event_handler('change', self.boundary_condition_change)
+
+    # 나타나기 효과
+    self.text_result.visible=False
+    self.button_media.visible = False
+    self.link_to_html.visible=False
 
     # Initialize plate
     self.platefigure_reset()
@@ -232,9 +238,8 @@ class plate(plateTemplate):
         progress_data = anvil.server.call('get_task_progress', task_id)
         progress = progress_data.get('progress', 0)
         self.canvas_progress_reset(progress)
-      
+        result_text = progress_data['result_text']
         if not progress_data['running']:
-          result_text = progress_data['result_text']
           break
 
     
@@ -242,13 +247,23 @@ class plate(plateTemplate):
     self.image_plate_deflection.source = image_3d
     self.image_plate_deflection.width = "1000px"
     self.image_plate_deflection.height = "800px"
-    
+
+    self.text_result.visible=True
     self.text_result.text = result_text
     self.text_result.height = "110px"
 
     
+    self.button_media.visible=True
 
+  def load_html_file(self, **event_args):
+        html_media = anvil.server.call('create_html', "/tmp/plate_3d_plot.html")
+        anvil.media.download(html_media)
 
+      
+    
+  def button_media_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.load_html_file()
     
   def canvas_progress_reset(self, progress=0,**event_args):
     """This method is called when the canvas is reset and cleared, such as when the window resizes, or the canvas is added to a form."""
@@ -263,15 +278,7 @@ class plate(plateTemplate):
     canvas.font = "16px Arial"
     canvas.fill_text(f"{int(progress)}/{self.input_epochs.text}", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
 
-  def load_html_file(self, **event_args):
-        # 서버에서 HTML 파일을 받아오기
-        html_media = anvil.server.call('create_html', "/tmp/plate_3d_plot.html")
-        # HTML 파일을 Image 컴포넌트에 설정
-        self.html_plate_deflection.source = html_media
-    
-  def button_media_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    self.load_html_file()
+  
 
 
 

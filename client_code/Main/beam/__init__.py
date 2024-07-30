@@ -23,6 +23,9 @@ class beam(beamTemplate):
     # Attach change event handlers
     self.left_boundary_condition.set_event_handler('change',self.left_boundary_condition_change)
     self.right_boundary_condition.set_event_handler('change',self.right_boundary_condition_change)
+
+    # 나타나기 효과
+    self.text_result.visible=False
     
     # Iniate canvas drawing
     self.beamfigure_reset()
@@ -188,6 +191,7 @@ class beam(beamTemplate):
     self.image_beam_deflection.width = "1000px"  
     self.image_beam_deflection.height = "400px"
 
+    self.text_result.visible=True
     self.text_result.text = result_text
     self.text_result.height = "110px"
 
@@ -205,12 +209,6 @@ class beam(beamTemplate):
     canvas.font = "16px Arial"
     canvas.fill_text(f"{int(progress)}/{self.input_epochs.text}", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
 
-  def input_x_pressed_enter(self, **event_args):
-    """This method is called when the user presses Enter in this text box"""
-    self.x=self.input_x.text if self.input_E.text else '1'
-    w=anvil.server.call('cal_w_at_x',self.model_path,self.x)
-    self.output_w.text=w
-    
     
 
 

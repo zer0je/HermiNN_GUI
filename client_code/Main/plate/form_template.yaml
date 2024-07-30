@@ -152,8 +152,8 @@ components:
   type: Button
   layout_properties: {grid_position: 'ZXNBAZ,IGMLHK', row_background: ''}
   event_bindings: {click: button_media_click}
-- name: html_plate_deflection
-  properties: {}
-  type: Image
-  layout_properties: {grid_position: 'MLHAMC,UJVAZD'}
+- name: link_to_html
+  properties: {align: center, font_size: 19}
+  type: Link
+  layout_properties: {grid_position: 'NRZQSP,JRZEWT'}
 is_package: true
