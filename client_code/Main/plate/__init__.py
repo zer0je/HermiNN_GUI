@@ -27,7 +27,6 @@ class plate(plateTemplate):
     # 나타나기 효과
     self.text_result.visible=False
     self.button_media.visible = False
-    self.link_to_html.visible=False
 
     # Initialize plate
     self.platefigure_reset()
@@ -252,15 +251,13 @@ class plate(plateTemplate):
     self.text_result.text = result_text
     self.text_result.height = "110px"
 
-    
     self.button_media.visible=True
 
   def load_html_file(self, **event_args):
         html_media = anvil.server.call('create_html', "/tmp/plate_3d_plot.html")
         anvil.media.download(html_media)
 
-      
-    
+
   def button_media_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.load_html_file()

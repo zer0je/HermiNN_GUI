@@ -4,8 +4,7 @@ unique_ids:
     Main.beam: '1721363176264180796569390.1603'
     Main.plate: '172162439441897769047479.21123'
   modules: {}
-  server_modules:
-    herminn_analysis: CIHD2AS5Y5DRHZGAXOFY4QSKMSAMYDY2
+  server_modules: {}
   assets:
     standard-page.html: MFO4D2LBFNQ7Y6DYFQU5X2GUXNE6JLIM
     theme.css: 7G6J7HJZIPGJXEI4DHOANGAKE5VGVRIQ
