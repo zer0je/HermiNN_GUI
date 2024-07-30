@@ -1,3 +1,4 @@
+Main Branch = HermiNN_GUI
 GUI Built by Yeong Je Kim
 email: satiho@snu.ac.kr
 
