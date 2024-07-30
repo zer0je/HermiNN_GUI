@@ -188,6 +188,10 @@ class beam(beamTemplate):
     self.image_beam_deflection.width = "1000px"  
     self.image_beam_deflection.height = "800px"
 
+    self.text_result.text = result_text
+    self.text_result.height = "110px"
+
+
   def canvas_progress_reset(self, progress=0,**event_args):
     """This method is called when the canvas is reset and cleared, such as when the window resizes, or the canvas is added to a form."""
     canvas = self.canvas_progress
