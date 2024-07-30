@@ -236,7 +236,12 @@ class plate(plateTemplate):
           break
 
     
-    image_3d=anvil.server.call('create_image',"/tmp/plate_3d_plot.png")
+    #image_3d=anvil.server.call('create_image',"/tmp/plate_3d_plot.png")
+    #self.image_plate_deflection.source = image_3d
+    #self.image_plate_deflection.width = "1000px"
+    #elf.image_plate_deflection.height = "800px"
+
+    image_3d=anvil.server.call('create_html',"/tmp/plate_3d_plot.html")
     self.image_plate_deflection.source = image_3d
     self.image_plate_deflection.width = "1000px"
     self.image_plate_deflection.height = "800px"
