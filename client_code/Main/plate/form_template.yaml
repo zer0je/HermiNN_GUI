@@ -146,6 +146,7 @@ components:
   properties: {align: center, font_size: 18}
   type: TextBox
   layout_properties: {grid_position: 'UFBVGX,PLJROF', full_width_row: true}
+  event_bindings: {pressed_enter: text_result_pressed_enter}
 - name: label_1
   properties: {text: Input Coordinates, align: center, font_size: 15, bold: true}
   type: Label

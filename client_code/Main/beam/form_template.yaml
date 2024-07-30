@@ -152,7 +152,7 @@ components:
   type: Image
   layout_properties: {grid_position: 'KMZCAX,FRFPST', full_width_row: true}
 - name: text_result
-  properties: {align: center}
+  properties: {align: center, text: '', font_size: 18}
   type: TextBox
   layout_properties: {grid_position: 'KOPYNG,BILBOP', full_width_row: true}
 is_package: true
