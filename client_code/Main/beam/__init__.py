@@ -178,8 +178,6 @@ class beam(beamTemplate):
     self.E=self.input_E.text if self.input_E.text else '206e09'
     self.I=self.input_I.text if self.input_I.text else '10000'
     self.L=self.input_L.text if self.input_L.text else '1'
-    #self.P=self.input_P.text if self.input_P.text else '0'
-    #self.x_p=self.input_x_p.text if self.input_x_p.text else '0'
     self.q=0
     self.lr=self.input_lr.text if self.input_lr.text else '0.1'
     self.epochs=self.input_epochs.text if self.input_epochs.text else '10'
