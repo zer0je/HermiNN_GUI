@@ -14,7 +14,8 @@ class beam(beamTemplate):
     self.init_components(**properties)
 
     # Set Color
-    self.Input.background = "#CED8F6"
+    self.button_calculate.background = "#CED8F6"
+    self.button_Px.background="#CED8F6"
 
     # Initialize dropdown menus
     self.left_boundary_condition.items = [ "Pinned", "Fixed","Free"]
@@ -158,7 +159,7 @@ class beam(beamTemplate):
     elif condition == "Fixed":
         return 'f'
 
-  def Input_click(self, **event_args):
+  def button_calculate_click(self, **event_args):
     """This method is called when the button is clicked"""
     left_condition=self.convert_boundary_condition_value(self.left_boundary_condition.selected_value)
     right_condition=self.convert_boundary_condition_value(self.right_boundary_condition.selected_value)
