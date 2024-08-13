@@ -169,7 +169,40 @@ class beam(beamTemplate):
     x_p=self.input_x_p.text if self.input_x_p.text else '0'
     self.P.append(P)
     self.x_p.append(x_p)
+    ###추가 사항
+    # Beam을 다시 그리기
+    x_start, y_start, beam_length, beam_height = self.create_beam()
+    self.draw_boundary_conditions(x_start, y_start, beam_length, beam_height)
     
+    # 하중 표시
+    self.draw_point_load(P, x_p, x_start, y_start, beam_length, beam_height)
+    ###
+
+  def draw_point_load(self, P, x_p, x_start, y_start, beam_length, beam_height):
+    canvas = self.beamfigure
+
+    L=float(self.input_L.text)
+    # 하중 위치 계산 (x_p는 0에서 L 사이의 값이라고 가정)
+    load_position = x_start + x_p / L * beam_length
+
+    # 하중 크기와 위치 시각화
+    load_arrow_length = 50  # 하중 화살표 길이
+    load_arrow_height = 10  # 하중 화살표 높이
+    
+    # 하중 화살표 그리기
+    canvas.stroke_style = "#FF0000"  # 빨간색으로 표시
+    canvas.begin_path()
+    canvas.move_to(load_position, y_start)
+    canvas.line_to(load_position, y_start - load_arrow_length)
+    canvas.line_to(load_position - load_arrow_height / 2, y_start - load_arrow_length + load_arrow_height / 2)
+    canvas.move_to(load_position, y_start - load_arrow_length)
+    canvas.line_to(load_position + load_arrow_height / 2, y_start - load_arrow_length + load_arrow_height / 2)
+    canvas.stroke()
+
+    # 하중 크기 텍스트 표시
+    canvas.fill_style = "#000000"  # 검은색으로 표시
+    canvas.font = "12px Arial"
+    canvas.fill_text(f"{P}N", load_position + 5, y_start - load_arrow_length - 10)
     
   def button_calculate_click(self, **event_args):
     """This method is called when the button is clicked"""
