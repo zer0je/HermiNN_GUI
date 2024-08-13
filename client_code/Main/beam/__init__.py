@@ -16,6 +16,7 @@ class beam(beamTemplate):
     # Set Color
     self.button_calculate.background = "#CED8F6"
     self.button_Px.background="#CED8F6"
+    self.button_q.background="#CED8F6"
 
     # Initialize dropdown menus
     self.left_boundary_condition.items = [ "Pinned", "Fixed","Free"]
@@ -31,6 +32,10 @@ class beam(beamTemplate):
     # Iniate canvas drawing
     self.beamfigure_reset()
     self.canvas_progress_reset(0)
+
+    # Iniate List
+    #self.P=[]
+    #self.x_p=[]
 
     
   def beamfigure_reset(self, **event_args):
@@ -158,7 +163,14 @@ class beam(beamTemplate):
         return 's'
     elif condition == "Fixed":
         return 'f'
-
+      
+  def button_Px_click(self,**event_args):
+    self.P=self.input_P.text if self.input_P.text else '0'
+    self.x_p=self.input_x_p.text if self.input_x_p.text else '0'
+    #self.P.append(self.input_P.text if self.input_P.text else '0')
+    #self.x_p.append(self.input_x_p.text if self.input_x_p.text else '0')
+    
+    
   def button_calculate_click(self, **event_args):
     """This method is called when the button is clicked"""
     left_condition=self.convert_boundary_condition_value(self.left_boundary_condition.selected_value)
@@ -166,9 +178,9 @@ class beam(beamTemplate):
     self.E=self.input_E.text if self.input_E.text else '206e09'
     self.I=self.input_I.text if self.input_I.text else '10000'
     self.L=self.input_L.text if self.input_L.text else '1'
-    self.P=self.input_P.text if self.input_P.text else '0'
-    self.x_p=self.input_x_p.text if self.input_x_p.text else '0'
-    self.q=self.input_q.text if self.input_q.text else '0'
+    #self.P=self.input_P.text if self.input_P.text else '0'
+    #self.x_p=self.input_x_p.text if self.input_x_p.text else '0'
+    self.q=0
     self.lr=self.input_lr.text if self.input_lr.text else '0.1'
     self.epochs=self.input_epochs.text if self.input_epochs.text else '10'
 
@@ -209,6 +221,9 @@ class beam(beamTemplate):
     canvas.fill_style = "#000000"
     canvas.font = "16px Arial"
     canvas.fill_text(f"{int(progress)}/{self.input_epochs.text}", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
+
+  
+
 
     
 

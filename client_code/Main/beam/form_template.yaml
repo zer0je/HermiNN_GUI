@@ -1,8 +1,9 @@
 container:
   type: ColumnPanel
-  properties: {spacing_above: small, col_widths: '{"HSOBGT":30,"IHTGXQ":30}'}
+  properties: {spacing_above: small, col_widths: '{"HSOBGT":30,"IHTGXQ":30,"CUJNNV":15,"EYUAON":15,"GRERIO":15,"OAUSHF":15}'}
   data_bindings:
   - {property: tooltip, code: '', writeback: false}
+  event_bindings: {show: form_show}
 components:
 - name: Title
   properties: {text: Beam Analysis, bold: true, align: center, font_size: 50, visible: true}
@@ -106,24 +107,61 @@ components:
 - name: button_Px
   properties: {text: Input}
   type: Button
-  layout_properties: {grid_position: 'PKNCCO,RSYBBN'}
-- name: distributed_load
-  properties: {text: Distributed Load, align: center, bold: true, underline: false, visible: true, icon: '', italic: false}
+  layout_properties: {grid_position: 'AZZAJK,SJGLLX', row_background: 'theme:Primary Overlay 1'}
+  event_bindings: {click: button_Px_click}
+- name: Linear_distributed_load
+  properties: {text: Linear Distributed Load, align: center, bold: true, underline: false, visible: true, icon: '', italic: false}
   type: Label
   layout_properties: {grid_position: 'TMESOE,AUMGVL', row_background: 'theme:Dark Overlay 1'}
+- name: linear_panel_9
+  properties: {}
+  type: LinearPanel
+  layout_properties: {grid_position: 'DNZZVH,CUJNNV', row_background: 'theme:Primary Overlay 1'}
+  components:
+  - name: label_q_l
+    properties: {text: 'Left Load (q_l) [N/m]', align: center, bold: true}
+    type: Label
+- name: input_q_l
+  properties: {}
+  type: TextBox
+  layout_properties: {grid_position: 'DNZZVH,EYUAON'}
+- name: label_x_l
+  properties: {text: 'Left Location [N/m]', align: center, bold: true}
+  type: Label
+  layout_properties: {grid_position: 'DNZZVH,GRERIO'}
+- name: input_x_l
+  properties: {}
+  type: TextBox
+  layout_properties: {grid_position: 'DNZZVH,OAUSHF'}
 - name: linear_panel_6
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'ZNGNIB,CTHGIM', row_background: 'theme:Primary Overlay 1'}
+  layout_properties: {grid_position: 'VGSQKJ,UNTGNR', row_background: 'theme:Primary Overlay 1'}
   components:
-  - name: label_q
-    properties: {text: Left Load, align: center, bold: true}
+  - name: label_q_r
+    properties: {text: 'Right Load (q_l) [N/m]', align: center, bold: true}
     type: Label
     layout_properties: {}
-- name: input_q
+- name: input_q_r
+  properties: {bold: false}
+  type: TextBox
+  layout_properties: {grid_position: 'VGSQKJ,STBXKT'}
+- name: label_x_r
+  properties: {text: 'Right Location [N/m]', align: center, bold: true}
+  type: Label
+  layout_properties: {grid_position: 'VGSQKJ,IOPDKP'}
+- name: input_x_r
   properties: {}
   type: TextBox
-  layout_properties: {grid_position: 'ZNGNIB,MCZKFT'}
+  layout_properties: {grid_position: 'VGSQKJ,ECDCHN'}
+- name: button_q
+  properties: {text: Input}
+  type: Button
+  layout_properties: {grid_position: 'DNZZTW,FJYCFI', row_background: 'theme:Primary Overlay 1'}
+- name: Learning_Plan
+  properties: {text: Learning Plan, align: center, bold: true, underline: false, visible: true, icon: '', italic: false}
+  type: Label
+  layout_properties: {grid_position: 'SKYOGR,WNKEHL', row_background: 'theme:Dark Overlay 1'}
 - name: linear_panel_7
   properties: {}
   type: LinearPanel
@@ -133,6 +171,7 @@ components:
     properties: {text: Learning Rate (lr), align: center, bold: true}
     type: Label
     layout_properties: {}
+  event_bindings: {show: linear_panel_7_show}
 - name: input_lr
   properties: {text: '0.1'}
   type: TextBox
