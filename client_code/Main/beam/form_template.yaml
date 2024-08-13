@@ -3,7 +3,7 @@ container:
   properties: {spacing_above: small, col_widths: '{"HSOBGT":30,"IHTGXQ":30,"CUJNNV":15,"EYUAON":15,"GRERIO":15,"OAUSHF":15}'}
   data_bindings:
   - {property: tooltip, code: '', writeback: false}
-  event_bindings: {show: form_show}
+  event_bindings: {}
 components:
 - name: Title
   properties: {text: Beam Analysis, bold: true, align: center, font_size: 50, visible: true}
@@ -171,7 +171,7 @@ components:
     properties: {text: Learning Rate (lr), align: center, bold: true}
     type: Label
     layout_properties: {}
-  event_bindings: {show: linear_panel_7_show}
+  event_bindings: {}
 - name: input_lr
   properties: {text: '0.1'}
   type: TextBox

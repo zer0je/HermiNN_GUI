@@ -34,8 +34,8 @@ class beam(beamTemplate):
     self.canvas_progress_reset(0)
 
     # Iniate List
-    #self.P=[]
-    #self.x_p=[]
+    self.P=[]
+    self.x_p=[]
 
     
   def beamfigure_reset(self, **event_args):
@@ -165,10 +165,10 @@ class beam(beamTemplate):
         return 'f'
       
   def button_Px_click(self,**event_args):
-    self.P=self.input_P.text if self.input_P.text else '0'
-    self.x_p=self.input_x_p.text if self.input_x_p.text else '0'
-    #self.P.append(self.input_P.text if self.input_P.text else '0')
-    #self.x_p.append(self.input_x_p.text if self.input_x_p.text else '0')
+    P=self.input_P.text if self.input_P.text else '0'
+    x_p=self.input_x_p.text if self.input_x_p.text else '0'
+    self.P.append(P)
+    self.x_p.append(x_p)
     
     
   def button_calculate_click(self, **event_args):
