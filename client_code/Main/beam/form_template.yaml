@@ -105,10 +105,15 @@ components:
   type: TextBox
   layout_properties: {grid_position: 'PKNCCO,PHRFIP'}
 - name: button_Px
-  properties: {text: Input}
+  properties: {text: Input, align: right}
   type: Button
-  layout_properties: {grid_position: 'AZZAJK,SJGLLX', row_background: 'theme:Primary Overlay 1'}
+  layout_properties: {grid_position: 'ZQJKJS,YHAHHS', row_background: 'theme:Primary Overlay 1'}
   event_bindings: {click: button_Px_click}
+- name: button_Px_undo
+  properties: {text: Undo, align: left}
+  type: Button
+  layout_properties: {grid_position: 'ZQJKJS,ZEJMTP'}
+  event_bindings: {click: button_Px_undo_click}
 - name: Linear_distributed_load
   properties: {text: Linear Distributed Load, align: center, bold: true, underline: false, visible: true, icon: '', italic: false}
   type: Label
@@ -158,6 +163,7 @@ components:
   properties: {text: Input}
   type: Button
   layout_properties: {grid_position: 'DNZZTW,FJYCFI', row_background: 'theme:Primary Overlay 1'}
+  event_bindings: {click: button_q_click}
 - name: Learning_Plan
   properties: {text: Learning Plan, align: center, bold: true, underline: false, visible: true, icon: '', italic: false}
   type: Label

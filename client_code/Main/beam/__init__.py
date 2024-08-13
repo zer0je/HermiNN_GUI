@@ -16,7 +16,9 @@ class beam(beamTemplate):
     # Set Color
     self.button_calculate.background = "#CED8F6"
     self.button_Px.background="#CED8F6"
+    self.button_Px_undo.background="#CED8F6"
     self.button_q.background="#CED8F6"
+
 
     # Initialize dropdown menus
     self.left_boundary_condition.items = [ "Pinned", "Fixed","Free"]
@@ -170,7 +172,58 @@ class beam(beamTemplate):
     self.P.append(P)
     self.x_p.append(x_p)
     
+    # Beam을 다시 그리기
+    x_start, y_start, beam_length, beam_height = self.create_beam()
+    self.draw_boundary_conditions(x_start, y_start, beam_length, beam_height)
     
+    # 하중 표시
+    self.draw_point_load(x_start, y_start, beam_length, beam_height)
+
+  def button_Px_undo_click(self, **event_args):
+    if self.P and self.x_p:
+      self.P.pop()
+      self.x_p.pop()
+      # Beam을 다시 그리기
+      x_start, y_start, beam_length, beam_height = self.create_beam()
+      self.draw_boundary_conditions(x_start, y_start, beam_length, beam_height)
+        
+      # 남아 있는 모든 하중을 다시 그리기
+      self.draw_point_load(x_start, y_start, beam_length, beam_height)
+
+
+  def draw_point_load(self, x_start, y_start, beam_length, beam_height):
+    canvas = self.beamfigure
+
+    L=float(self.input_L.text)
+    P_array=list(map(float,self.P))
+    x_p_array=list(map(float,self.x_p))
+
+    for P, x_p in zip(P_array,x_p_array):
+      # 하중 위치 계산 (x_p는 0에서 L 사이의 값이라고 가정)
+      load_position = x_start + x_p / L * beam_length
+  
+      # 하중 크기와 위치 시각화
+      load_arrow_length = 50  # 하중 화살표 길이
+      load_arrow_height = 10  # 하중 화살표 높이
+      
+      # 하중 화살표 그리기
+      canvas.stroke_style = "#FF0000"  # 빨간색으로 표시
+      canvas.begin_path()
+      canvas.move_to(load_position, y_start)
+      canvas.line_to(load_position, y_start + load_arrow_length)
+      canvas.line_to(load_position - load_arrow_height / 2, y_start + load_arrow_length - load_arrow_height / 2)
+      canvas.move_to(load_position, y_start + load_arrow_length)
+      canvas.line_to(load_position + load_arrow_height / 2, y_start + load_arrow_length - load_arrow_height / 2)
+      canvas.stroke()
+  
+      # 하중 크기 텍스트 표시
+      canvas.fill_style = "#000000"  # 검은색으로 표시
+      canvas.font = "12px Arial"
+      canvas.fill_text(f"{P}N", load_position + 5, y_start + load_arrow_length + 10)
+
+  def button_q_click(self, **event_args):
+    pass
+  
   def button_calculate_click(self, **event_args):
     """This method is called when the button is clicked"""
     left_condition=self.convert_boundary_condition_value(self.left_boundary_condition.selected_value)
@@ -186,8 +239,14 @@ class beam(beamTemplate):
     task_id = anvil.server.call(
             'launch_calculate_beam', left_condition, right_condition, self.E, self.I, self.L, self.P, self.x_p, self.q, self.lr, int(self.epochs)
         )
+
+    # 하중 초기화
     self.P.clear()
     self.x_p.clear()
+    
+    # Beam을 다시 그리기
+    x_start, y_start, beam_length, beam_height = self.create_beam()
+    self.draw_boundary_conditions(x_start, y_start, beam_length, beam_height)
 
      # 진행 상황 폴링
     while True:
@@ -221,6 +280,10 @@ class beam(beamTemplate):
     canvas.fill_style = "#000000"
     canvas.font = "16px Arial"
     canvas.fill_text(f"{int(progress)}/{self.input_epochs.text}", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
+
+  
+
+
 
   
 

@@ -2,3 +2,4 @@ torch
 matplotlib
 scikit-learn
 scipy
+numpy
