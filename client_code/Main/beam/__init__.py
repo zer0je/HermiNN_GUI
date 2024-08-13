@@ -15,7 +15,6 @@ class beam(beamTemplate):
 
     # Set Color
     self.button_calculate.background = "#CED8F6"
-    self.button_Px.background="#CED8F6"
 
     # Initialize dropdown menus
     self.left_boundary_condition.items = [ "Pinned", "Fixed","Free"]

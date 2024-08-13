@@ -83,30 +83,34 @@ components:
   properties: {text: Point Load, align: center, bold: true, underline: false, visible: true, icon: '', italic: false}
   type: Label
   layout_properties: {grid_position: 'VHCOAY,VMKBNQ', row_background: 'theme:Dark Overlay 1'}
-- name: linear_panel_4
+- name: linear_panel_9
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'PKNCCO,BKATDR', row_background: 'theme:Primary Overlay 1'}
+  layout_properties: {grid_position: 'GGSJXI,HLKWDE', row_background: 'theme:Primary Overlay 1'}
   components:
-  - name: label_P
-    properties: {text: 'Point Load (P) [N]', align: center, bold: true}
-    type: Label
+  - name: linear_panel_4
+    properties: {}
+    type: LinearPanel
+    components:
+    - name: label_P
+      properties: {text: 'Point Load (P) [N]', align: center, bold: true}
+      type: Label
 - name: input_P
   properties: {text: '1'}
   type: TextBox
-  layout_properties: {grid_position: 'PKNCCO,GVCOSR'}
-- name: label_x_p
-  properties: {text: 'Location (x) [m]', align: center, bold: true, underline: false}
-  type: Label
-  layout_properties: {grid_position: 'PKNCCO,RGMXCT'}
+  layout_properties: {grid_position: 'GGSJXI,WBTEYK'}
+- name: linear_panel_5
+  properties: {}
+  type: LinearPanel
+  layout_properties: {grid_position: 'BTVOEK,UBCTUS', row_background: 'theme:Primary Overlay 1'}
+  components:
+  - name: label_x_p
+    properties: {text: 'Location (x) [m]', align: center, bold: true, underline: false}
+    type: Label
 - name: input_x_p
   properties: {text: '0.5'}
   type: TextBox
-  layout_properties: {grid_position: 'PKNCCO,PHRFIP'}
-- name: button_Px
-  properties: {text: Input}
-  type: Button
-  layout_properties: {grid_position: 'PKNCCO,RSYBBN'}
+  layout_properties: {grid_position: 'BTVOEK,NGWVYQ'}
 - name: distributed_load
   properties: {text: Distributed Load, align: center, bold: true, underline: false, visible: true, icon: '', italic: false}
   type: Label
@@ -117,7 +121,7 @@ components:
   layout_properties: {grid_position: 'ZNGNIB,CTHGIM', row_background: 'theme:Primary Overlay 1'}
   components:
   - name: label_q
-    properties: {text: Left Load, align: center, bold: true}
+    properties: {text: 'Uniform Load (q) [N/m]', align: center, bold: true}
     type: Label
     layout_properties: {}
 - name: input_q
