@@ -188,6 +188,8 @@ class beam(beamTemplate):
     task_id = anvil.server.call(
             'launch_calculate_beam', left_condition, right_condition, self.E, self.I, self.L, self.P, self.x_p, self.q, self.lr, int(self.epochs)
         )
+    self.P.clear()
+    self.x_p.clear()
 
      # 진행 상황 폴링
     while True:
