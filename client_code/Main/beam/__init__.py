@@ -38,6 +38,10 @@ class beam(beamTemplate):
     # Iniate List
     self.P=[]
     self.x_p=[]
+    self.q_l=[]
+    self.x_l=[]
+    self.q_r=[]
+    self.x_r=[]
 
     
   def beamfigure_reset(self, **event_args):
@@ -222,7 +226,14 @@ class beam(beamTemplate):
       canvas.fill_text(f"{P}N", load_position + 5, y_start + load_arrow_length + 10)
 
   def button_q_click(self, **event_args):
-    pass
+    q_l=self.input_q_l.text if self.input_q_l.text else '0'
+    x_l=self.input_x_l.text if self.input_x_l.text else '0'
+    q_r=self.input_q_r.text if self.input_q_r.text else '0'
+    x_r=self.input_x_r.text if self.input_x_r.text else self.input_L.text
+    self.q_l.append(q_l)
+    self.x_l.append(x_l)
+    self.q_r.append(q_r)
+    self.x_r.append(x_r)
   
   def button_calculate_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -231,18 +242,21 @@ class beam(beamTemplate):
     self.E=self.input_E.text if self.input_E.text else '206e09'
     self.I=self.input_I.text if self.input_I.text else '10000'
     self.L=self.input_L.text if self.input_L.text else '1'
-    self.q=0
     self.lr=self.input_lr.text if self.input_lr.text else '0.1'
     self.epochs=self.input_epochs.text if self.input_epochs.text else '10'
 
      # 백그라운드 태스크 시작
     task_id = anvil.server.call(
-            'launch_calculate_beam', left_condition, right_condition, self.E, self.I, self.L, self.P, self.x_p, self.q, self.lr, int(self.epochs)
+            'launch_calculate_beam', left_condition, right_condition, self.E, self.I, self.L, self.P, self.x_p, self.q_l,self.x_l,self.q_r,self.x_r, self.lr, int(self.epochs)
         )
 
     # 하중 초기화
     self.P.clear()
     self.x_p.clear()
+    self.q_l.clear()
+    self.x_l.clear()
+    self.q_r.clear()
+    self.x_r.clear()
     
     # Beam을 다시 그리기
     x_start, y_start, beam_length, beam_height = self.create_beam()
