@@ -18,6 +18,7 @@ class beam(beamTemplate):
     self.button_Px.background="#CED8F6"
     self.button_Px_undo.background="#CED8F6"
     self.button_q.background="#CED8F6"
+    self.button_q_undo.background="#CED8F6"
 
 
     # Initialize dropdown menus
@@ -89,7 +90,7 @@ class beam(beamTemplate):
         # Draw x-axis label
         canvas.fill_style = "#000000"
         canvas.font = "14px Arial"
-        canvas.fill_text("x", x_arrow_start + arrow_length + 10, y_arrow_start + 5)
+        canvas.fill_text("x", x_arrow_start + arrow_length + 5, y_arrow_start + 5)
 
         # Draw vertical z-axis at the left end of the beam
         z_arrow_length = 80
@@ -181,7 +182,7 @@ class beam(beamTemplate):
     self.draw_boundary_conditions(x_start, y_start, beam_length, beam_height)
     
     # 하중 표시
-    self.draw_point_load(x_start, y_start, beam_length, beam_height)
+    self.draw_all_loads(x_start, y_start, beam_length, beam_height)
 
   def button_Px_undo_click(self, **event_args):
     if self.P and self.x_p:
@@ -192,9 +193,47 @@ class beam(beamTemplate):
       self.draw_boundary_conditions(x_start, y_start, beam_length, beam_height)
         
       # 남아 있는 모든 하중을 다시 그리기
-      self.draw_point_load(x_start, y_start, beam_length, beam_height)
+      self.draw_all_loads(x_start, y_start, beam_length, beam_height)
 
+ 
 
+  def button_q_click(self, **event_args):
+    q_l=self.input_q_l.text if self.input_q_l.text else '0'
+    x_l=self.input_x_l.text if self.input_x_l.text else '0'
+    q_r=self.input_q_r.text if self.input_q_r.text else '0'
+    x_r=self.input_x_r.text if self.input_x_r.text else self.input_L.text
+    self.q_l.append(q_l)
+    self.x_l.append(x_l)
+    self.q_r.append(q_r)
+    self.x_r.append(x_r)
+
+   # Beam을 다시 그리기
+    x_start, y_start, beam_length, beam_height = self.create_beam()
+    self.draw_boundary_conditions(x_start, y_start, beam_length, beam_height)
+    
+    # 분포 하중 표시
+    self.draw_all_loads(x_start, y_start, beam_length, beam_height)
+
+  def button_q_undo_click(self, **event_args):
+    if self.q_l and self.x_l and self.q_r and self.x_r:
+      self.q_l.pop()
+      self.x_l.pop()
+      self.q_r.pop()
+      self.x_r.pop()
+        
+      # Beam을 다시 그리기
+      x_start, y_start, beam_length, beam_height = self.create_beam()
+      self.draw_boundary_conditions(x_start, y_start, beam_length, beam_height)
+        
+      # 남아 있는 모든 하중을 다시 그리기
+      self.draw_all_loads(x_start, y_start, beam_length, beam_height)
+
+  def draw_all_loads(self, x_start, y_start, beam_length, beam_height):
+    # 분포 하중 표시
+    self.draw_distributed_load(x_start, y_start, beam_length, beam_height)
+    # 집중 하중 표시
+    self.draw_point_load(x_start, y_start, beam_length, beam_height)
+  
   def draw_point_load(self, x_start, y_start, beam_length, beam_height):
     canvas = self.beamfigure
 
@@ -224,17 +263,72 @@ class beam(beamTemplate):
       canvas.fill_style = "#000000"  # 검은색으로 표시
       canvas.font = "12px Arial"
       canvas.fill_text(f"{P}N", load_position + 5, y_start + load_arrow_length + 10)
+      
+  def draw_distributed_load(self, x_start, y_start, beam_length, beam_height):
+    canvas = self.beamfigure
 
-  def button_q_click(self, **event_args):
-    q_l=self.input_q_l.text if self.input_q_l.text else '0'
-    x_l=self.input_x_l.text if self.input_x_l.text else '0'
-    q_r=self.input_q_r.text if self.input_q_r.text else '0'
-    x_r=self.input_x_r.text if self.input_x_r.text else self.input_L.text
-    self.q_l.append(q_l)
-    self.x_l.append(x_l)
-    self.q_r.append(q_r)
-    self.x_r.append(x_r)
-  
+    L = float(self.input_L.text)
+    q_l_array = list(map(float, self.q_l))
+    x_l_array = list(map(float, self.x_l))
+    q_r_array = list(map(float, self.q_r))
+    x_r_array = list(map(float, self.x_r))
+
+    for q_l, x_l, q_r, x_r in zip(q_l_array, x_l_array, q_r_array, x_r_array):
+        # 분포 하중 시작과 끝 위치 계산
+        start_position = x_start + x_l / L * beam_length
+        end_position = x_start + x_r / L * beam_length
+        
+        # 분포 하중 크기 시각화 (선형 분포)
+        load_start_height = q_l / max(q_l_array + q_r_array) * 50  # 화살표 길이로 크기 시각화
+        load_end_height = q_r / max(q_l_array + q_r_array) * 50
+
+        # 하중을 나타내는 화살표의 개수
+        num_arrows = 10
+
+        # 화살표의 간격
+        arrow_spacing = (end_position - start_position) / (num_arrows - 1)
+
+        # 분포 하중 크기 시각화 (선형 분포)
+        max_load = max(q_l_array + q_r_array)
+        load_start_height = q_l / max_load * 50  # 시작점에서 화살표 길이
+        load_end_height = q_r / max_load * 50  # 끝점에서 화살표 길이
+        # 직선을 그리기 위해 각 화살표의 꼭대기 위치를 저장할 리스트
+        arrow_tops = []
+
+        for i in range(num_arrows):
+            # 각 화살표의 위치 계산
+            current_position = start_position + i * arrow_spacing
+            # 선형 보간을 통해 각 화살표의 높이 계산
+            current_height = load_start_height + (load_end_height - load_start_height) * (i / (num_arrows - 1))
+            arrow_tops.append((current_position, y_start - current_height))
+
+            # 화살표 그리기
+            arrow_length = current_height
+            arrow_head_size = 10
+
+            canvas.stroke_style = "#0000FF"  # 파란색으로 표시
+            canvas.begin_path()
+            canvas.move_to(current_position, y_start-arrow_length)  # 화살표의 시작점 (보의 위쪽)
+            canvas.line_to(current_position, y_start)  # 화살표의 끝점 (아래로 향하게)
+            canvas.line_to(current_position - arrow_head_size / 2, y_start  - arrow_head_size / 2)
+            canvas.move_to(current_position, y_start )
+            canvas.line_to(current_position + arrow_head_size / 2, y_start  - arrow_head_size / 2)
+            canvas.stroke()
+
+        # 화살표 상단을 직선으로 연결
+        canvas.stroke_style = "#0000FF"
+        canvas.begin_path()
+        canvas.move_to(*arrow_tops[0])
+        for pos in arrow_tops[1:]:
+            canvas.line_to(*pos)
+        canvas.stroke()
+      
+        # 하중 크기 텍스트 표시 (시작점과 끝점에 각각 표시)
+        canvas.fill_style = "#000000"  # 검은색으로 표시
+        canvas.font = "12px Arial"
+        canvas.fill_text(f"{q_l}N/m", start_position - 20, y_start - load_start_height - 15)
+        canvas.fill_text(f"{q_r}N/m", end_position + 5, y_start - load_end_height - 15)
+      
   def button_calculate_click(self, **event_args):
     """This method is called when the button is clicked"""
     left_condition=self.convert_boundary_condition_value(self.left_boundary_condition.selected_value)
@@ -294,6 +388,8 @@ class beam(beamTemplate):
     canvas.fill_style = "#000000"
     canvas.font = "16px Arial"
     canvas.fill_text(f"{int(progress)}/{self.input_epochs.text}", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
+
+  
 
   
 

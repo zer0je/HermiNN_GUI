@@ -24,10 +24,14 @@ components:
     align: full
   type: DropDown
   layout_properties: {grid_position: 'GTYBUY,PJSGAB', full_width_row: true, row_background: ''}
+- name: label_boundarycondition_copy
+  properties: {text: Material and Dimension Properties, align: center, bold: true, underline: false, visible: true, icon: '', italic: false, font_size: 16}
+  type: Label
+  layout_properties: {grid_position: 'CVJTRS,LNMCUL', row_background: 'theme:Dark Overlay 1'}
 - name: linear_panel_1
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'CELUKQ,NUVYKA', row_background: 'theme:Dark Overlay 1'}
+  layout_properties: {grid_position: 'CELUKQ,NUVYKA', row_background: 'theme:Primary Overlay 1'}
   components:
   - name: label_E
     properties: {text: 'Young''s Modulus (E) [Pa]', align: center, bold: true}
@@ -40,7 +44,7 @@ components:
 - name: linear_panel_2
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'QNNTCN,KMQIES', row_background: 'theme:Dark Overlay 1'}
+  layout_properties: {grid_position: 'QNNTCN,KMQIES', row_background: 'theme:Primary Overlay 1'}
   components:
   - name: label_mu
     properties: {text: 'Poisson''s Ratio (𝜈) [-]', align: center, bold: true}
@@ -53,7 +57,7 @@ components:
 - name: linear_panel_3
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'OBJUBJ,GKNLMU', row_background: 'theme:Dark Overlay 1', full_width_row: false}
+  layout_properties: {grid_position: 'OBJUBJ,GKNLMU', row_background: 'theme:Primary Overlay 1', full_width_row: false}
   components:
   - name: label_width
     properties: {text: 'Width [m]', bold: true, align: center}
@@ -66,7 +70,7 @@ components:
 - name: linear_panel_4
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'PKNCCO,BKATDR', row_background: 'theme:Dark Overlay 1'}
+  layout_properties: {grid_position: 'PKNCCO,BKATDR', row_background: 'theme:Primary Overlay 1'}
   components:
   - name: label_height
     properties: {text: 'Height [m]', align: center, bold: true}
@@ -79,7 +83,7 @@ components:
 - name: linear_panel_5
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'RCXHGM,BHIGNW', row_background: 'theme:Dark Overlay 1'}
+  layout_properties: {grid_position: 'RCXHGM,BHIGNW', row_background: 'theme:Primary Overlay 1'}
   components:
   - name: label_t
     properties: {text: 'Thickness (t) [m]', align: center, bold: true, underline: false}
@@ -89,10 +93,14 @@ components:
   properties: {text: '0.001'}
   type: TextBox
   layout_properties: {grid_position: 'RCXHGM,WDJEHV'}
+- name: label_boundarycondition_copy_copy
+  properties: {text: Uniform Distributed Load, align: center, bold: true, underline: false, visible: true, icon: '', italic: false, font_size: 16}
+  type: Label
+  layout_properties: {grid_position: 'TMYPNX,ETDDSG', row_background: 'theme:Dark Overlay 1'}
 - name: linear_panel_6
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'ZNGNIB,CTHGIM', row_background: 'theme:Dark Overlay 1'}
+  layout_properties: {grid_position: 'ZNGNIB,CTHGIM', row_background: 'theme:Primary Overlay 1'}
   components:
   - name: label_q
     properties: {text: 'Uniform Load (q) [N/m^2]', align: center, bold: true}
@@ -102,6 +110,10 @@ components:
   properties: {text: '1'}
   type: TextBox
   layout_properties: {grid_position: 'ZNGNIB,MCZKFT'}
+- name: label_boundarycondition_copy_copy_copy
+  properties: {text: Learning Plan, align: center, bold: true, underline: false, visible: true, icon: '', italic: false, font_size: 16}
+  type: Label
+  layout_properties: {grid_position: 'YIEDHO,EGKCAY', row_background: 'theme:Dark Overlay 1'}
 - name: linear_panel_7
   properties: {}
   type: LinearPanel
