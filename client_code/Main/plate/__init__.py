@@ -164,6 +164,7 @@ class plate(plateTemplate):
             canvas.move_to(x + plate_width, y + i)
             canvas.line_to(x + plate_width + line_length, y + i + line_length)
             canvas.stroke()
+        canvas.line_width = 1
 
   def draw_simply_supported(self, x, y, plate_width, plate_height):
         canvas = self.platefigure
