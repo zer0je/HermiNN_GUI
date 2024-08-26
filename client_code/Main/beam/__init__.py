@@ -362,7 +362,7 @@ class beam(beamTemplate):
         progress = progress_data.get('progress', 0)
         self.canvas_progress_reset(progress)
       
-        if not progress_data.get('running',True):
+        if not progress_data['running']:
           result_text = progress_data['result_text']
           break
 
