@@ -365,23 +365,17 @@ class beam(beamTemplate):
         self.canvas_progress_reset(progress)
       
         if not progress_data['running']:
-          result_text=progress_data.get('result_text','None')
-          time.sleep(1)
+          result_text=progress_data['result_text']
           break
-          
+
+    image_media=anvil.server.call('create_image',"/tmp/beam_plot.png")
+    self.image_beam_deflection.source = image_media
+    self.image_beam_deflection.width = "1000px"  
+    self.image_beam_deflection.height = "400px"
+
     self.text_result.visible=True
     self.text_result.text = result_text
     self.text_result.height = "110px"
-    
-    #image_media=anvil.server.call('create_image',"/tmp/beam_plot.png")
-    #image_media=anvil.server.call('create_image', "C:/Users/User/AppData/Local/Temp/beam_plot.png")
-    #self.image_beam_deflection.source = image_media
-    #self.image_beam_deflection.width = "1000px"  
-    #self.image_beam_deflection.height = "400px"
-
-    #self.text_result.visible=True
-    #self.text_result.text = result_text
-    #self.text_result.height = "110px"
 
 
   def canvas_progress_reset(self, progress=0,**event_args):
