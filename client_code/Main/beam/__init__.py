@@ -363,15 +363,11 @@ class beam(beamTemplate):
         self.canvas_progress_reset(progress)
       
         if not progress_data.get('running',True):
-          result_text = progress_data.get('result_text', "No result text available")
-          image_path = progress_data.get('image_path')
-          print(result_text)
-          print(image_path)
+          result_text = progress_data['result_text']
           break
-        else:
-         print("Error: No progress data received.")
+
           
-    image_media=anvil.server.call('create_image',image_path)
+    image_media=anvil.server.call('create_image',"/tmp/beam_plot.png")
     self.image_beam_deflection.source = image_media
     self.image_beam_deflection.width = "1000px"  
     self.image_beam_deflection.height = "400px"
