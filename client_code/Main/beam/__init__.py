@@ -366,7 +366,7 @@ class beam(beamTemplate):
           result_text = progress_data['result_text']
           break
           
-    image_media=anvil.server.call('create_image',"beam_plot.png")
+    image_media=anvil.server.call('create_image',"C:\Users\User\AppData\Local\Temp\beam_plot.png")
     self.image_beam_deflection.source = image_media
     self.image_beam_deflection.width = "1000px"  
     self.image_beam_deflection.height = "400px"
