@@ -365,30 +365,23 @@ class beam(beamTemplate):
         self.canvas_progress_reset(progress)
       
         if not progress_data['running']:
-          progress_data = anvil.server.call('get_task_progress', task_id)
-          result_text = progress_data['result_text']
-          image_path=progress_data['image_path']
-
-
-          if result_text and image_path:
-            print("complete")
-            print(result_text)
-            print(image_path)
-            break  # 데이터가 제대로 수신되면 루프 종료
-          else:
-            print("Waiting for the task to complete...")
-            time.sleep(1)
+          result_text=progress_data.get('result_text','None')
+          time.sleep(1)
           break
           
-    #image_media=anvil.server.call('create_image',"/tmp/beam_plot.png")
-    image_media=anvil.server.call('create_image',image_path)
-    self.image_beam_deflection.source = image_media
-    self.image_beam_deflection.width = "1000px"  
-    self.image_beam_deflection.height = "400px"
-
     self.text_result.visible=True
     self.text_result.text = result_text
     self.text_result.height = "110px"
+    
+    #image_media=anvil.server.call('create_image',"/tmp/beam_plot.png")
+    #image_media=anvil.server.call('create_image', "C:/Users/User/AppData/Local/Temp/beam_plot.png")
+    #self.image_beam_deflection.source = image_media
+    #self.image_beam_deflection.width = "1000px"  
+    #self.image_beam_deflection.height = "400px"
+
+    #self.text_result.visible=True
+    #self.text_result.text = result_text
+    #self.text_result.height = "110px"
 
 
   def canvas_progress_reset(self, progress=0,**event_args):
