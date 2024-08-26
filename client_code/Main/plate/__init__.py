@@ -226,11 +226,13 @@ class plate(plateTemplate):
     self.t = self.input_t.text if self.input_t.text else "0.001"
     self.q = self.input_q.text if self.input_q.text else "0"
     self.lr = self.input_lr.text if self.input_lr.text else "0.01"
-    self.epochs = self.input_epochs.text if self.input_epochs.text else "210"
+    self.num_epochs = self.input_num_epochs.text if self.input_num_epochs.text else "210"
+    self.num_nodes=self.input_num_nodes.text if self.input_num_nodes.text else "6"
+    self.num_sampling=self.input_num_sampling.text if self.input_num_sampling.text else "5000"
 
     # 백그라운드 태스크 시작
     task_id = anvil.server.call(
-            'launch_calculate_plate', boundary_condition,self.E,self.mu,self.W,self.H,self.t,self.q,self.lr, int(self.epochs)
+            'launch_calculate_plate', boundary_condition,self.E,self.mu,self.W,self.H,self.t,self.q,self.lr, self.num_epochs,self.num_nodes,self.num_sampling
         )
     
     # 진행 상황 폴링
@@ -271,10 +273,10 @@ class plate(plateTemplate):
     canvas.fill_style = "#e0e0e0"
     canvas.fill_rect(10, self.canvas_progress.get_height() - 30, self.canvas_progress.get_width() - 20, 20)
     canvas.fill_style = "#76c7c0"
-    canvas.fill_rect(10, self.canvas_progress.get_height() - 30, (self.canvas_progress.get_width() - 20) * (progress /float(self.input_epochs.text) ), 20)
+    canvas.fill_rect(10, self.canvas_progress.get_height() - 30, (self.canvas_progress.get_width() - 20) * (progress /float(self.input_num_epochs.text) ), 20)
     canvas.fill_style = "#000000"
     canvas.font = "16px Arial"
-    canvas.fill_text(f"{int(progress)}/{self.input_epochs.text}", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
+    canvas.fill_text(f"{int(progress)}/{self.input_num_epochs.text}", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
 
   
 

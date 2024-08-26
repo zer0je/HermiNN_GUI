@@ -337,11 +337,13 @@ class beam(beamTemplate):
     self.I=self.input_I.text if self.input_I.text else '10000'
     self.L=self.input_L.text if self.input_L.text else '1'
     self.lr=self.input_lr.text if self.input_lr.text else '0.1'
-    self.epochs=self.input_epochs.text if self.input_epochs.text else '10'
+    self.num_epochs=self.input_num_epochs.text if self.input_num_epochs.text else '10'
+    self.num_nodes=self.input_num_nodes.text if self.input_num_nodes.text else '3'
+    self.num_sampling=self.input_num_sampling.text if self.input_num_sampling.text else '10000'
 
      # 백그라운드 태스크 시작
     task_id = anvil.server.call(
-            'launch_calculate_beam', left_condition, right_condition, self.E, self.I, self.L, self.P, self.x_p, self.q_l,self.x_l,self.q_r,self.x_r, self.lr, int(self.epochs)
+            'launch_calculate_beam', left_condition, right_condition, self.E, self.I, self.L, self.P, self.x_p, self.q_l,self.x_l,self.q_r,self.x_r, self.lr, self.num_epochs,self.num_nodes,self.num_sampling
         )
 
     # 하중 초기화
@@ -385,10 +387,10 @@ class beam(beamTemplate):
     canvas.fill_style = "#e0e0e0"
     canvas.fill_rect(10, self.canvas_progress.get_height() - 30, self.canvas_progress.get_width() - 20, 20)
     canvas.fill_style = "#76c7c0"
-    canvas.fill_rect(10, self.canvas_progress.get_height() - 30, (self.canvas_progress.get_width() - 20) * (progress /float(self.input_epochs.text) ), 20)
+    canvas.fill_rect(10, self.canvas_progress.get_height() - 30, (self.canvas_progress.get_width() - 20) * (progress /float(self.input_num_epochs.text) ), 20)
     canvas.fill_style = "#000000"
     canvas.font = "16px Arial"
-    canvas.fill_text(f"{int(progress)}/{self.input_epochs.text}", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
+    canvas.fill_text(f"{int(progress)}/{self.input_num_epochs.text}", self.canvas_progress.get_width() / 2 - 10, self.canvas_progress.get_height() - 35)
 
   
 

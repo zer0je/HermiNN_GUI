@@ -195,11 +195,36 @@ components:
   - name: label_epochs
     properties: {text: Number of Epochs, align: center, bold: true}
     type: Label
-    layout_properties: {}
-- name: input_epochs
+- name: input_num_epochs
   properties: {underline: false, text: '10'}
   type: TextBox
   layout_properties: {grid_position: 'LTOXEL,NTBECJ'}
+- name: linear_panel_5
+  properties: {}
+  type: LinearPanel
+  layout_properties: {grid_position: 'NBVURA,AAJKPS', full_width_row: false, row_background: 'theme:Tertiary'}
+  components:
+  - name: label_nodes
+    properties: {text: Number of Nodes, align: center, bold: true}
+    type: Label
+    layout_properties: {}
+- name: input_num_nodes
+  properties: {text: '3'}
+  type: TextBox
+  layout_properties: {grid_position: 'NBVURA,TEGMQD'}
+- name: linear_panel_10
+  properties: {}
+  type: LinearPanel
+  layout_properties: {grid_position: 'HKQPGY,IIURIS', row_background: 'theme:Tertiary'}
+  components:
+  - name: label_nodes_copy
+    properties: {text: Number of Sampling Data, align: center, bold: true}
+    type: Label
+    layout_properties: {}
+- name: input_num_sampling
+  properties: {text: '10000'}
+  type: TextBox
+  layout_properties: {grid_position: 'HKQPGY,XHBWFH'}
 - name: button_calculate
   properties: {text: Calculate, bold: true, font_size: 20}
   type: Button
