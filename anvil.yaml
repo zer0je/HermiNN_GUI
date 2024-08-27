@@ -20,6 +20,9 @@ services:
 - source: /runtime/services/tables.yml
   client_config: {}
   server_config: {auto_create_missing_columns: true}
+- source: /runtime/services/anvil/secrets.yml
+  client_config: {}
+  server_config: {}
 startup: {type: form, module: Main}
 db_schema:
   users:
