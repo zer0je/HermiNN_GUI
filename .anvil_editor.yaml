@@ -1,12 +1,11 @@
 unique_ids:
+  assets:
+    standard-page.html: MFO4D2LBFNQ7Y6DYFQU5X2GUXNE6JLIM
+    theme.css: 7G6J7HJZIPGJXEI4DHOANGAKE5VGVRIQ
   forms:
     Main: 5CDZJQRUATB64PCZT6FHRR27DZBXFVWT
     Main.beam: '1721363176264180796569390.1603'
     Main.plate: '172162439441897769047479.21123'
   modules: {}
-  server_modules:
-    ServerModule1: '1724733370764373151199919.2343'
-  assets:
-    standard-page.html: MFO4D2LBFNQ7Y6DYFQU5X2GUXNE6JLIM
-    theme.css: 7G6J7HJZIPGJXEI4DHOANGAKE5VGVRIQ
   scripts: {}
+  server_modules: {}

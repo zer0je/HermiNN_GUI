@@ -1,246 +1,246 @@
-container:
-  type: ColumnPanel
-  properties: {spacing_above: small, col_widths: '{"HSOBGT":30,"IHTGXQ":30,"CUJNNV":15,"EYUAON":15,"GRERIO":15,"OAUSHF":15}'}
-  data_bindings:
-  - {property: tooltip, code: '', writeback: false}
-  event_bindings: {}
 components:
-- name: Title
-  properties: {text: Beam Analysis, bold: true, align: center, font_size: 50, visible: true}
+- data_bindings: []
+  layout_properties: {full_width_row: true, grid_position: 'SUYECG,CVGSBW', row_background: 'theme:Dark Overlay 2'}
+  name: Title
+  properties: {align: center, bold: true, font_size: 50, text: Beam Analysis, visible: true}
   type: Label
-  layout_properties: {grid_position: 'SUYECG,CVGSBW', full_width_row: true, row_background: 'theme:Dark Overlay 2'}
-  data_bindings: []
-- name: beamfigure
+- event_bindings: {reset: beamfigure_reset}
+  layout_properties: {full_width_row: true, grid_position: 'GATVPM,MMZIPX'}
+  name: beamfigure
   properties: {height: 201.44439697265625}
   type: Canvas
-  layout_properties: {grid_position: 'GATVPM,MMZIPX', full_width_row: true}
-  event_bindings: {reset: beamfigure_reset}
-- name: left_label
-  properties: {text: Left Boundary Condition, align: center, bold: true, underline: false, visible: true, icon: '', italic: false, font_size: 16}
+- layout_properties: {full_width_row: true, grid_position: 'QJOPZN,HSOBGT', row_background: 'theme:Disabled Container'}
+  name: left_label
+  properties: {align: center, bold: true, font_size: 16, icon: '', italic: false, text: Left Boundary Condition, underline: false, visible: true}
   type: Label
-  layout_properties: {grid_position: 'QJOPZN,HSOBGT', full_width_row: true, row_background: 'theme:Disabled Container'}
-- name: right_label
-  properties: {text: Right Boundary Condition, align: center, bold: true, font_size: 16}
+- layout_properties: {grid_position: 'QJOPZN,IHTGXQ', row_background: 'theme:On Disabled'}
+  name: right_label
+  properties: {align: center, bold: true, font_size: 16, text: Right Boundary Condition}
   type: Label
-  layout_properties: {grid_position: 'QJOPZN,IHTGXQ', row_background: 'theme:On Disabled'}
-- name: left_boundary_condition
-  properties:
-    items: [Pinned, Fixed, Free]
-    include_placeholder: false
-  type: DropDown
-  layout_properties: {grid_position: 'VVSUVI,IHTHIX', full_width_row: true}
-  data_bindings: []
+- data_bindings: []
   event_bindings: {change: left_boundary_condition_change}
-- name: right_boundary_condition
+  layout_properties: {full_width_row: true, grid_position: 'VVSUVI,IHTHIX'}
+  name: left_boundary_condition
   properties:
+    include_placeholder: false
     items: [Pinned, Fixed, Free]
-    align: full
   type: DropDown
+- event_bindings: {change: right_boundary_condition_change}
   layout_properties: {grid_position: 'VVSUVI,CBFZZZ'}
-  event_bindings: {change: right_boundary_condition_change}
-- name: Properties
-  properties: {text: Material and Dimension Properties, align: center, bold: true, underline: false, visible: true, icon: '', italic: false, font_size: 16}
+  name: right_boundary_condition
+  properties:
+    align: full
+    items: [Pinned, Fixed, Free]
+  type: DropDown
+- layout_properties: {grid_position: 'LBWMUC,XKGFLL', row_background: 'theme:Dark Overlay 1'}
+  name: Properties
+  properties: {align: center, bold: true, font_size: 16, icon: '', italic: false, text: Material and Dimension Properties, underline: false, visible: true}
   type: Label
-  layout_properties: {grid_position: 'LBWMUC,XKGFLL', row_background: 'theme:Dark Overlay 1'}
-- name: linear_panel_1
-  properties: {}
-  type: LinearPanel
-  layout_properties: {grid_position: 'CELUKQ,NUVYKA', row_background: 'theme:Primary Overlay 1'}
-  components:
+- components:
   - name: label_E
-    properties: {text: 'Young''s Modulus (E) [Pa]', align: center, bold: true}
+    properties: {align: center, bold: true, text: 'Young''s Modulus (E) [Pa]'}
     type: Label
-- name: input_E
-  properties: {text: '1'}
-  type: TextBox
+  layout_properties: {grid_position: 'CELUKQ,NUVYKA', row_background: 'theme:Primary Overlay 1'}
+  name: linear_panel_1
+  properties: {}
+  type: LinearPanel
+- event_bindings: {pressed_enter: text_box_1_pressed_enter}
   layout_properties: {grid_position: 'CELUKQ,KWEKXS'}
-  event_bindings: {pressed_enter: text_box_1_pressed_enter}
-- name: linear_panel_2
-  properties: {}
-  type: LinearPanel
-  layout_properties: {grid_position: 'QNNTCN,KMQIES', row_background: 'theme:Primary Overlay 1'}
-  components:
+  name: input_E
+  properties: {text: '1'}
+  type: TextBox
+- components:
   - name: label_I
-    properties: {text: 'Moment of Inertia (I) [m^4]', align: center, bold: true}
+    properties: {align: center, bold: true, text: 'Moment of Inertia (I) [m^4]'}
     type: Label
-- name: input_I
-  properties: {text: '1'}
-  type: TextBox
-  layout_properties: {grid_position: 'QNNTCN,ZIIYLP'}
-- name: linear_panel_3
+  layout_properties: {grid_position: 'QNNTCN,KMQIES', row_background: 'theme:Primary Overlay 1'}
+  name: linear_panel_2
   properties: {}
   type: LinearPanel
+- layout_properties: {grid_position: 'QNNTCN,ZIIYLP'}
+  name: input_I
+  properties: {text: '1'}
+  type: TextBox
+- components:
+  - layout_properties: {}
+    name: label_L
+    properties: {align: center, bold: true, text: 'Length (L) [m]'}
+    type: Label
   layout_properties: {grid_position: 'DNYHSE,HYUDYE', row_background: 'theme:Primary Overlay 1'}
-  components:
-  - name: label_L
-    properties: {text: 'Length (L) [m]', align: center, bold: true}
-    type: Label
-    layout_properties: {}
-- name: input_L
-  properties: {text: '1'}
-  type: TextBox
-  layout_properties: {grid_position: 'DNYHSE,WBGVUD'}
-- name: point_load
-  properties: {text: Point Load, align: center, bold: true, underline: false, visible: true, icon: '', italic: false, font_size: 16}
-  type: Label
-  layout_properties: {grid_position: 'VHCOAY,VMKBNQ', row_background: 'theme:Dark Overlay 1'}
-- name: linear_panel_4
+  name: linear_panel_3
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'PKNCCO,BKATDR', row_background: 'theme:Primary Overlay 1'}
-  components:
-  - name: label_P
-    properties: {text: 'Point Load (P) [N]', align: center, bold: true}
-    type: Label
-- name: input_P
+- layout_properties: {grid_position: 'DNYHSE,WBGVUD'}
+  name: input_L
   properties: {text: '1'}
   type: TextBox
-  layout_properties: {grid_position: 'PKNCCO,GVCOSR'}
-- name: label_x_p
-  properties: {text: 'Location (x) [m]', align: center, bold: true, underline: false}
+- layout_properties: {grid_position: 'VHCOAY,VMKBNQ', row_background: 'theme:Dark Overlay 1'}
+  name: point_load
+  properties: {align: center, bold: true, font_size: 16, icon: '', italic: false, text: Point Load, underline: false, visible: true}
   type: Label
-  layout_properties: {grid_position: 'PKNCCO,RGMXCT'}
-- name: input_x_p
+- components:
+  - name: label_P
+    properties: {align: center, bold: true, text: 'Point Load (P) [N]'}
+    type: Label
+  layout_properties: {grid_position: 'PKNCCO,BKATDR', row_background: 'theme:Primary Overlay 1'}
+  name: linear_panel_4
+  properties: {}
+  type: LinearPanel
+- layout_properties: {grid_position: 'PKNCCO,GVCOSR'}
+  name: input_P
+  properties: {text: '1'}
+  type: TextBox
+- layout_properties: {grid_position: 'PKNCCO,RGMXCT'}
+  name: label_x_p
+  properties: {align: center, bold: true, text: 'Location (x) [m]', underline: false}
+  type: Label
+- layout_properties: {grid_position: 'PKNCCO,PHRFIP'}
+  name: input_x_p
   properties: {text: '0.5'}
   type: TextBox
-  layout_properties: {grid_position: 'PKNCCO,PHRFIP'}
-- name: button_Px
-  properties: {text: Input, align: right}
-  type: Button
+- event_bindings: {click: button_Px_click}
   layout_properties: {grid_position: 'ZQJKJS,YHAHHS', row_background: 'theme:Primary Overlay 1'}
-  event_bindings: {click: button_Px_click}
-- name: button_Px_undo
-  properties: {text: Undo, align: left}
+  name: button_Px
+  properties: {align: right, text: Input}
   type: Button
+- event_bindings: {click: button_Px_undo_click}
   layout_properties: {grid_position: 'ZQJKJS,ZEJMTP'}
-  event_bindings: {click: button_Px_undo_click}
-- name: Linear_distributed_load
-  properties: {text: Linear Distributed Load, align: center, bold: true, underline: false, visible: true, icon: '', italic: false, font_size: 16}
+  name: button_Px_undo
+  properties: {align: left, text: Undo}
+  type: Button
+- layout_properties: {grid_position: 'TMESOE,AUMGVL', row_background: 'theme:Dark Overlay 1'}
+  name: Linear_distributed_load
+  properties: {align: center, bold: true, font_size: 16, icon: '', italic: false, text: Linear Distributed Load, underline: false, visible: true}
   type: Label
-  layout_properties: {grid_position: 'TMESOE,AUMGVL', row_background: 'theme:Dark Overlay 1'}
-- name: linear_panel_9
+- components:
+  - name: label_q_l
+    properties: {align: center, bold: true, text: 'Left Load (q_l) [N/m]'}
+    type: Label
+  layout_properties: {grid_position: 'DNZZVH,CUJNNV', row_background: 'theme:Primary Overlay 1'}
+  name: linear_panel_9
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'DNZZVH,CUJNNV', row_background: 'theme:Primary Overlay 1'}
-  components:
-  - name: label_q_l
-    properties: {text: 'Left Load (q_l) [N/m]', align: center, bold: true}
-    type: Label
-- name: input_q_l
+- layout_properties: {grid_position: 'DNZZVH,EYUAON'}
+  name: input_q_l
   properties: {text: '1'}
   type: TextBox
-  layout_properties: {grid_position: 'DNZZVH,EYUAON'}
-- name: label_x_l
-  properties: {text: 'Left Location (x_l) [m]', align: center, bold: true}
+- layout_properties: {grid_position: 'DNZZVH,GRERIO'}
+  name: label_x_l
+  properties: {align: center, bold: true, text: 'Left Location (x_l) [m]'}
   type: Label
-  layout_properties: {grid_position: 'DNZZVH,GRERIO'}
-- name: input_x_l
+- layout_properties: {grid_position: 'DNZZVH,OAUSHF'}
+  name: input_x_l
   properties: {text: '0'}
   type: TextBox
-  layout_properties: {grid_position: 'DNZZVH,OAUSHF'}
-- name: linear_panel_6
+- components:
+  - layout_properties: {}
+    name: label_q_r
+    properties: {align: center, bold: true, text: 'Right Load (q_r) [N/m]'}
+    type: Label
+  layout_properties: {grid_position: 'VGSQKJ,UNTGNR', row_background: 'theme:Primary Overlay 1'}
+  name: linear_panel_6
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'VGSQKJ,UNTGNR', row_background: 'theme:Primary Overlay 1'}
-  components:
-  - name: label_q_r
-    properties: {text: 'Right Load (q_r) [N/m]', align: center, bold: true}
-    type: Label
-    layout_properties: {}
-- name: input_q_r
+- layout_properties: {grid_position: 'VGSQKJ,STBXKT'}
+  name: input_q_r
   properties: {bold: false, text: '1'}
   type: TextBox
-  layout_properties: {grid_position: 'VGSQKJ,STBXKT'}
-- name: label_x_r
-  properties: {text: 'Right Location (x_r) [m]', align: center, bold: true}
+- layout_properties: {grid_position: 'VGSQKJ,IOPDKP'}
+  name: label_x_r
+  properties: {align: center, bold: true, text: 'Right Location (x_r) [m]'}
   type: Label
-  layout_properties: {grid_position: 'VGSQKJ,IOPDKP'}
-- name: input_x_r
+- layout_properties: {grid_position: 'VGSQKJ,ECDCHN'}
+  name: input_x_r
   properties: {text: '1'}
   type: TextBox
-  layout_properties: {grid_position: 'VGSQKJ,ECDCHN'}
-- name: button_q
-  properties: {text: Input, align: right}
-  type: Button
+- event_bindings: {click: button_q_click}
   layout_properties: {grid_position: 'DNZZTW,FJYCFI', row_background: 'theme:Primary Overlay 1'}
-  event_bindings: {click: button_q_click}
-- name: button_q_undo
-  properties: {text: Undo, align: left}
+  name: button_q
+  properties: {align: right, text: Input}
   type: Button
+- event_bindings: {click: button_q_undo_click}
   layout_properties: {grid_position: 'DNZZTW,XTYZZJ'}
-  event_bindings: {click: button_q_undo_click}
-- name: Learning_Plan
-  properties: {text: Learning Plan, align: center, bold: true, underline: false, visible: true, icon: '', italic: false, font_size: 16}
+  name: button_q_undo
+  properties: {align: left, text: Undo}
+  type: Button
+- layout_properties: {grid_position: 'SKYOGR,WNKEHL', row_background: 'theme:Dark Overlay 1'}
+  name: Learning_Plan
+  properties: {align: center, bold: true, font_size: 16, icon: '', italic: false, text: Learning Plan, underline: false, visible: true}
   type: Label
-  layout_properties: {grid_position: 'SKYOGR,WNKEHL', row_background: 'theme:Dark Overlay 1'}
-- name: linear_panel_7
+- components:
+  - layout_properties: {}
+    name: label_lr
+    properties: {align: center, bold: true, text: Learning Rate (lr)}
+    type: Label
+  event_bindings: {}
+  layout_properties: {grid_position: 'RGENGQ,LKGDEO', row_background: 'theme:Tertiary'}
+  name: linear_panel_7
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'RGENGQ,LKGDEO', row_background: 'theme:Tertiary'}
-  components:
-  - name: label_lr
-    properties: {text: Learning Rate (lr), align: center, bold: true}
-    type: Label
-    layout_properties: {}
-  event_bindings: {}
-- name: input_lr
+- layout_properties: {full_width_row: false, grid_position: 'RGENGQ,AUVCWA', row_background: ''}
+  name: input_lr
   properties: {text: '0.1'}
   type: TextBox
-  layout_properties: {grid_position: 'RGENGQ,AUVCWA', row_background: '', full_width_row: false}
-- name: linear_panel_8
-  properties: {}
-  type: LinearPanel
-  layout_properties: {grid_position: 'LTOXEL,WCQFZI', row_background: 'theme:Tertiary'}
-  components:
+- components:
   - name: label_epochs
-    properties: {text: Number of Epochs, align: center, bold: true}
+    properties: {align: center, bold: true, text: Number of Epochs}
     type: Label
-- name: input_num_epochs
-  properties: {underline: false, text: '10'}
-  type: TextBox
-  layout_properties: {grid_position: 'LTOXEL,NTBECJ'}
-- name: linear_panel_5
+  layout_properties: {grid_position: 'LTOXEL,WCQFZI', row_background: 'theme:Tertiary'}
+  name: linear_panel_8
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'NBVURA,AAJKPS', full_width_row: false, row_background: 'theme:Tertiary'}
-  components:
-  - name: label_nodes
-    properties: {text: Number of Nodes, align: center, bold: true}
+- layout_properties: {grid_position: 'LTOXEL,NTBECJ'}
+  name: input_num_epochs
+  properties: {text: '10', underline: false}
+  type: TextBox
+- components:
+  - layout_properties: {}
+    name: label_nodes
+    properties: {align: center, bold: true, text: Number of Nodes}
     type: Label
-    layout_properties: {}
-- name: input_num_nodes
+  layout_properties: {full_width_row: false, grid_position: 'NBVURA,AAJKPS', row_background: 'theme:Tertiary'}
+  name: linear_panel_5
+  properties: {}
+  type: LinearPanel
+- layout_properties: {grid_position: 'NBVURA,TEGMQD'}
+  name: input_num_nodes
   properties: {text: '3'}
   type: TextBox
-  layout_properties: {grid_position: 'NBVURA,TEGMQD'}
-- name: linear_panel_10
+- components:
+  - layout_properties: {}
+    name: label_nodes_copy
+    properties: {align: center, bold: true, text: Number of Sampling Data}
+    type: Label
+  layout_properties: {grid_position: 'HKQPGY,IIURIS', row_background: 'theme:Tertiary'}
+  name: linear_panel_10
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'HKQPGY,IIURIS', row_background: 'theme:Tertiary'}
-  components:
-  - name: label_nodes_copy
-    properties: {text: Number of Sampling Data, align: center, bold: true}
-    type: Label
-    layout_properties: {}
-- name: input_num_sampling
+- layout_properties: {grid_position: 'HKQPGY,XHBWFH'}
+  name: input_num_sampling
   properties: {text: '10000'}
   type: TextBox
-  layout_properties: {grid_position: 'HKQPGY,XHBWFH'}
-- name: button_calculate
-  properties: {text: Calculate, bold: true, font_size: 20}
+- event_bindings: {click: button_calculate_click}
+  layout_properties: {full_width_row: true, grid_position: 'KDMNCC,WGAMZI', row_background: ''}
+  name: button_calculate
+  properties: {bold: true, font_size: 20, text: Calculate}
   type: Button
-  layout_properties: {grid_position: 'KDMNCC,WGAMZI', row_background: '', full_width_row: true}
-  event_bindings: {click: button_calculate_click}
-- name: canvas_progress
+- event_bindings: {reset: canvas_progress_reset}
+  layout_properties: {grid_position: 'VQOXAJ,CXTWMT'}
+  name: canvas_progress
   properties: {height: 100}
   type: Canvas
-  layout_properties: {grid_position: 'VQOXAJ,CXTWMT'}
-  event_bindings: {reset: canvas_progress_reset}
-- name: image_beam_deflection
+- layout_properties: {full_width_row: true, grid_position: 'KMZCAX,FRFPST'}
+  name: image_beam_deflection
   properties: {visible: true}
   type: Image
-  layout_properties: {grid_position: 'KMZCAX,FRFPST', full_width_row: true}
-- name: text_result
-  properties: {align: center, text: '', font_size: 18}
+- layout_properties: {full_width_row: true, grid_position: 'KOPYNG,BILBOP'}
+  name: text_result
+  properties: {align: center, font_size: 18, text: ''}
   type: TextBox
-  layout_properties: {grid_position: 'KOPYNG,BILBOP', full_width_row: true}
+container:
+  data_bindings:
+  - {code: '', property: tooltip, writeback: false}
+  event_bindings: {}
+  properties: {col_widths: '{"HSOBGT":30,"IHTGXQ":30,"CUJNNV":15,"EYUAON":15,"GRERIO":15,"OAUSHF":15}', spacing_above: small}
+  type: ColumnPanel
 is_package: true

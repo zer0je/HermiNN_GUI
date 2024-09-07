@@ -1,51 +1,51 @@
 allow_embedding: false
-package_name: HermiNN_GUI
+db_schema:
+  users:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: email
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: enabled
+      type: bool
+    - admin_ui: {order: 2, width: 200}
+      name: last_login
+      type: datetime
+    - admin_ui: {order: 3, width: 200}
+      name: password_hash
+      type: string
+    - admin_ui: {order: 4, width: 200}
+      name: n_password_failures
+      type: number
+    - admin_ui: {order: 5, width: 200}
+      name: confirmed_email
+      type: bool
+    server: full
+    title: Users
+dependencies: []
 name: HermiNN GUI
-startup_form: null
+package_name: HermiNN_GUI
 renamed: true
 runtime_options:
-  version: 2
   client_version: '3'
-  server_version: python3-sandbox
   server_spec: {base: python310-machine-learning}
   server_spec_disabled:
+    base: python310-machine-learning
     requirements: |-
       torch
       matplotlib
       scikit-learn
       scipy
-    base: python310-machine-learning
-dependencies: []
+  server_version: python3-sandbox
+  version: 2
 services:
-- source: /runtime/services/tables.yml
-  client_config: {}
+- client_config: {}
   server_config: {auto_create_missing_columns: true}
-- source: /runtime/services/anvil/secrets.yml
-  client_config: {}
+  source: /runtime/services/tables.yml
+- client_config: {}
   server_config: {}
-startup: {type: form, module: Main}
-db_schema:
-  users:
-    client: none
-    server: full
-    columns:
-    - name: email
-      admin_ui: {order: 0, width: 200}
-      type: string
-    - name: enabled
-      admin_ui: {order: 1, width: 200}
-      type: bool
-    - name: last_login
-      admin_ui: {order: 2, width: 200}
-      type: datetime
-    - name: password_hash
-      admin_ui: {order: 3, width: 200}
-      type: string
-    - name: n_password_failures
-      admin_ui: {order: 4, width: 200}
-      type: number
-    - name: confirmed_email
-      admin_ui: {order: 5, width: 200}
-      type: bool
-    title: Users
+  source: /runtime/services/anvil/secrets.yml
+startup: {module: Main, type: form}
+startup_form: null
 uplink_visible: true

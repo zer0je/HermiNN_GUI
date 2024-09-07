@@ -1,193 +1,193 @@
-container:
-  type: ColumnPanel
-  properties: {spacing_above: small, col_widths: '{"HSOBGT":30}'}
-  data_bindings:
-  - {property: tooltip, code: '', writeback: false}
 components:
-- name: Title
-  properties: {text: Plate Analysis, bold: true, align: center, font_size: 50, visible: true}
+- data_bindings: []
+  layout_properties: {full_width_row: true, grid_position: 'SUYECG,CVGSBW', row_background: 'theme:Dark Overlay 2'}
+  name: Title
+  properties: {align: center, bold: true, font_size: 50, text: Plate Analysis, visible: true}
   type: Label
-  layout_properties: {grid_position: 'SUYECG,CVGSBW', full_width_row: true, row_background: 'theme:Dark Overlay 2'}
-  data_bindings: []
-- name: platefigure
+- event_bindings: {reset: platefigure_reset}
+  layout_properties: {full_width_row: true, grid_position: 'GATVPM,MMZIPX'}
+  name: platefigure
   properties: {height: 201.44439697265625}
   type: Canvas
-  layout_properties: {grid_position: 'GATVPM,MMZIPX', full_width_row: true}
-  event_bindings: {reset: platefigure_reset}
-- name: label_boundarycondition
-  properties: {text: Boundary Condition, align: center, bold: true, underline: false, visible: true, icon: '', italic: false, font_size: 16}
+- layout_properties: {full_width_row: true, grid_position: 'QJOPZN,HSOBGT', row_background: 'theme:Disabled Container'}
+  name: label_boundarycondition
+  properties: {align: center, bold: true, font_size: 16, icon: '', italic: false, text: Boundary Condition, underline: false, visible: true}
   type: Label
-  layout_properties: {grid_position: 'QJOPZN,HSOBGT', full_width_row: true, row_background: 'theme:Disabled Container'}
-- name: boundary_condition
+- layout_properties: {full_width_row: true, grid_position: 'GTYBUY,PJSGAB', row_background: ''}
+  name: boundary_condition
   properties:
-    items: [Clamped, Simply supported]
     align: full
+    items: [Clamped, Simply supported]
   type: DropDown
-  layout_properties: {grid_position: 'GTYBUY,PJSGAB', full_width_row: true, row_background: ''}
-- name: label_boundarycondition_copy
-  properties: {text: Material and Dimension Properties, align: center, bold: true, underline: false, visible: true, icon: '', italic: false, font_size: 16}
+- layout_properties: {grid_position: 'CVJTRS,LNMCUL', row_background: 'theme:Dark Overlay 1'}
+  name: label_boundarycondition_copy
+  properties: {align: center, bold: true, font_size: 16, icon: '', italic: false, text: Material and Dimension Properties, underline: false, visible: true}
   type: Label
-  layout_properties: {grid_position: 'CVJTRS,LNMCUL', row_background: 'theme:Dark Overlay 1'}
-- name: linear_panel_1
+- components:
+  - name: label_E
+    properties: {align: center, bold: true, text: 'Young''s Modulus (E) [Pa]'}
+    type: Label
+  layout_properties: {grid_position: 'CELUKQ,NUVYKA', row_background: 'theme:Primary Overlay 1'}
+  name: linear_panel_1
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'CELUKQ,NUVYKA', row_background: 'theme:Primary Overlay 1'}
-  components:
-  - name: label_E
-    properties: {text: 'Young''s Modulus (E) [Pa]', align: center, bold: true}
-    type: Label
-- name: input_E
+- event_bindings: {pressed_enter: text_box_1_pressed_enter}
+  layout_properties: {grid_position: 'CELUKQ,KWEKXS'}
+  name: input_E
   properties: {text: '206e09'}
   type: TextBox
-  layout_properties: {grid_position: 'CELUKQ,KWEKXS'}
-  event_bindings: {pressed_enter: text_box_1_pressed_enter}
-- name: linear_panel_2
+- components:
+  - layout_properties: {}
+    name: label_mu
+    properties: {align: center, bold: true, text: 'Poisson''s Ratio (𝜈) [-]'}
+    type: Label
+  layout_properties: {grid_position: 'QNNTCN,KMQIES', row_background: 'theme:Primary Overlay 1'}
+  name: linear_panel_2
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'QNNTCN,KMQIES', row_background: 'theme:Primary Overlay 1'}
-  components:
-  - name: label_mu
-    properties: {text: 'Poisson''s Ratio (𝜈) [-]', align: center, bold: true}
-    type: Label
-    layout_properties: {}
-- name: input_mu
+- layout_properties: {grid_position: 'QNNTCN,ZIIYLP'}
+  name: input_mu
   properties: {text: '0.3'}
   type: TextBox
-  layout_properties: {grid_position: 'QNNTCN,ZIIYLP'}
-- name: linear_panel_3
+- components:
+  - layout_properties: {}
+    name: label_width
+    properties: {align: center, bold: true, text: 'Width [m]'}
+    type: Label
+  layout_properties: {full_width_row: false, grid_position: 'OBJUBJ,GKNLMU', row_background: 'theme:Primary Overlay 1'}
+  name: linear_panel_3
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'OBJUBJ,GKNLMU', row_background: 'theme:Primary Overlay 1', full_width_row: false}
-  components:
-  - name: label_width
-    properties: {text: 'Width [m]', bold: true, align: center}
-    type: Label
-    layout_properties: {}
-- name: input_W
+- layout_properties: {grid_position: 'OBJUBJ,RYTBNM', row_background: ''}
+  name: input_W
   properties: {text: '2'}
   type: TextBox
-  layout_properties: {grid_position: 'OBJUBJ,RYTBNM', row_background: ''}
-- name: linear_panel_4
-  properties: {}
-  type: LinearPanel
+- components:
+  - layout_properties: {}
+    name: label_height
+    properties: {align: center, bold: true, text: 'Height [m]'}
+    type: Label
   layout_properties: {grid_position: 'PKNCCO,BKATDR', row_background: 'theme:Primary Overlay 1'}
-  components:
-  - name: label_height
-    properties: {text: 'Height [m]', align: center, bold: true}
-    type: Label
-    layout_properties: {}
-- name: input_H
-  properties: {text: '2'}
-  type: TextBox
-  layout_properties: {grid_position: 'PKNCCO,GVCOSR'}
-- name: linear_panel_5
+  name: linear_panel_4
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'RCXHGM,BHIGNW', row_background: 'theme:Primary Overlay 1'}
-  components:
-  - name: label_t
-    properties: {text: 'Thickness (t) [m]', align: center, bold: true, underline: false}
+- layout_properties: {grid_position: 'PKNCCO,GVCOSR'}
+  name: input_H
+  properties: {text: '2'}
+  type: TextBox
+- components:
+  - layout_properties: {}
+    name: label_t
+    properties: {align: center, bold: true, text: 'Thickness (t) [m]', underline: false}
     type: Label
-    layout_properties: {}
-- name: input_t
+  layout_properties: {grid_position: 'RCXHGM,BHIGNW', row_background: 'theme:Primary Overlay 1'}
+  name: linear_panel_5
+  properties: {}
+  type: LinearPanel
+- layout_properties: {grid_position: 'RCXHGM,WDJEHV'}
+  name: input_t
   properties: {text: '0.001'}
   type: TextBox
-  layout_properties: {grid_position: 'RCXHGM,WDJEHV'}
-- name: label_boundarycondition_copy_copy
-  properties: {text: Uniform Distributed Load, align: center, bold: true, underline: false, visible: true, icon: '', italic: false, font_size: 16}
+- layout_properties: {grid_position: 'TMYPNX,ETDDSG', row_background: 'theme:Dark Overlay 1'}
+  name: label_boundarycondition_copy_copy
+  properties: {align: center, bold: true, font_size: 16, icon: '', italic: false, text: Uniform Distributed Load, underline: false, visible: true}
   type: Label
-  layout_properties: {grid_position: 'TMYPNX,ETDDSG', row_background: 'theme:Dark Overlay 1'}
-- name: linear_panel_6
+- components:
+  - layout_properties: {}
+    name: label_q
+    properties: {align: center, bold: true, text: 'Uniform Load (q) [N/m^2]'}
+    type: Label
+  layout_properties: {grid_position: 'ZNGNIB,CTHGIM', row_background: 'theme:Primary Overlay 1'}
+  name: linear_panel_6
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'ZNGNIB,CTHGIM', row_background: 'theme:Primary Overlay 1'}
-  components:
-  - name: label_q
-    properties: {text: 'Uniform Load (q) [N/m^2]', align: center, bold: true}
-    type: Label
-    layout_properties: {}
-- name: input_q
+- layout_properties: {grid_position: 'ZNGNIB,MCZKFT'}
+  name: input_q
   properties: {text: '1'}
   type: TextBox
-  layout_properties: {grid_position: 'ZNGNIB,MCZKFT'}
-- name: label_boundarycondition_copy_copy_copy
-  properties: {text: Learning Plan, align: center, bold: true, underline: false, visible: true, icon: '', italic: false, font_size: 16}
+- layout_properties: {grid_position: 'YIEDHO,EGKCAY', row_background: 'theme:Dark Overlay 1'}
+  name: label_boundarycondition_copy_copy_copy
+  properties: {align: center, bold: true, font_size: 16, icon: '', italic: false, text: Learning Plan, underline: false, visible: true}
   type: Label
-  layout_properties: {grid_position: 'YIEDHO,EGKCAY', row_background: 'theme:Dark Overlay 1'}
-- name: linear_panel_7
+- components:
+  - layout_properties: {}
+    name: label_lr
+    properties: {align: center, bold: true, text: Learning Rate (lr)}
+    type: Label
+  layout_properties: {grid_position: 'RGENGQ,LKGDEO', row_background: 'theme:Tertiary'}
+  name: linear_panel_7
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'RGENGQ,LKGDEO', row_background: 'theme:Tertiary'}
-  components:
-  - name: label_lr
-    properties: {text: Learning Rate (lr), align: center, bold: true}
-    type: Label
-    layout_properties: {}
-- name: input_lr
+- layout_properties: {grid_position: 'RGENGQ,AUVCWA'}
+  name: input_lr
   properties: {text: '0.5'}
   type: TextBox
-  layout_properties: {grid_position: 'RGENGQ,AUVCWA'}
-- name: linear_panel_8
-  properties: {}
-  type: LinearPanel
+- components:
+  - layout_properties: {}
+    name: label_epochs
+    properties: {align: center, bold: true, text: Number of Epochs}
+    type: Label
   layout_properties: {grid_position: 'LTOXEL,WCQFZI', row_background: 'theme:Tertiary'}
-  components:
-  - name: label_epochs
-    properties: {text: Number of Epochs, align: center, bold: true}
-    type: Label
-    layout_properties: {}
-- name: input_num_epochs
-  properties: {underline: false, text: '5'}
-  type: TextBox
-  layout_properties: {grid_position: 'LTOXEL,NTBECJ'}
-- name: linear_panel_9
+  name: linear_panel_8
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'MUTQXJ,SUENKR', row_background: 'theme:Tertiary'}
-  components:
-  - name: label_num_nodes
-    properties: {text: Number of  Nodes (each line), align: center, bold: true}
+- layout_properties: {grid_position: 'LTOXEL,NTBECJ'}
+  name: input_num_epochs
+  properties: {text: '5', underline: false}
+  type: TextBox
+- components:
+  - layout_properties: {}
+    name: label_num_nodes
+    properties: {align: center, bold: true, text: Number of  Nodes (each line)}
     type: Label
-    layout_properties: {}
-- name: input_num_nodes
+  layout_properties: {grid_position: 'MUTQXJ,SUENKR', row_background: 'theme:Tertiary'}
+  name: linear_panel_9
+  properties: {}
+  type: LinearPanel
+- layout_properties: {grid_position: 'MUTQXJ,JAQKYF'}
+  name: input_num_nodes
   properties: {text: '6'}
   type: TextBox
-  layout_properties: {grid_position: 'MUTQXJ,JAQKYF'}
-- name: linear_panel_10
+- components:
+  - layout_properties: {}
+    name: label_num_nodes_copy
+    properties: {align: center, bold: true, text: Number of  Sampling Data}
+    type: Label
+  layout_properties: {grid_position: 'SATVSP,VRDGIP', row_background: 'theme:Tertiary'}
+  name: linear_panel_10
   properties: {}
   type: LinearPanel
-  layout_properties: {grid_position: 'SATVSP,VRDGIP', row_background: 'theme:Tertiary'}
-  components:
-  - name: label_num_nodes_copy
-    properties: {text: Number of  Sampling Data, align: center, bold: true}
-    type: Label
-    layout_properties: {}
-- name: input_num_sampling
+- layout_properties: {grid_position: 'SATVSP,QYPTMM'}
+  name: input_num_sampling
   properties: {text: '5000'}
   type: TextBox
-  layout_properties: {grid_position: 'SATVSP,QYPTMM'}
-- name: Input
-  properties: {text: Calculate, bold: true, font_size: 20}
+- event_bindings: {click: Input_click}
+  layout_properties: {full_width_row: true, grid_position: 'KDMNCC,WGAMZI', row_background: ''}
+  name: Input
+  properties: {bold: true, font_size: 20, text: Calculate}
   type: Button
-  layout_properties: {grid_position: 'KDMNCC,WGAMZI', row_background: '', full_width_row: true}
-  event_bindings: {click: Input_click}
-- name: canvas_progress
+- event_bindings: {reset: canvas_progress_reset}
+  layout_properties: {grid_position: 'MYCUXH,KVGMUB'}
+  name: canvas_progress
   properties: {height: 100}
   type: Canvas
-  layout_properties: {grid_position: 'MYCUXH,KVGMUB'}
-  event_bindings: {reset: canvas_progress_reset}
-- name: image_plate_deflection
-  properties: {visible: true, spacing_below: large}
+- layout_properties: {full_width_row: true, grid_position: 'KMZCAX,FRFPST'}
+  name: image_plate_deflection
+  properties: {spacing_below: large, visible: true}
   type: Image
-  layout_properties: {grid_position: 'KMZCAX,FRFPST', full_width_row: true}
-- name: text_result
+- event_bindings: {}
+  layout_properties: {grid_position: 'IKGWML,ORNDDN'}
+  name: text_result
   properties: {align: center, font_size: 18}
   type: TextBox
-  layout_properties: {grid_position: 'IKGWML,ORNDDN'}
-  event_bindings: {}
-- name: button_media
-  properties: {text: Create Interactive Media, bold: true, font_size: 20}
-  type: Button
+- event_bindings: {click: button_media_click}
   layout_properties: {grid_position: 'ZXNBAZ,IGMLHK', row_background: ''}
-  event_bindings: {click: button_media_click}
+  name: button_media
+  properties: {bold: true, font_size: 20, text: Create Interactive Media}
+  type: Button
+container:
+  data_bindings:
+  - {code: '', property: tooltip, writeback: false}
+  properties: {col_widths: '{"HSOBGT":30}', spacing_above: small}
+  type: ColumnPanel
 is_package: true
