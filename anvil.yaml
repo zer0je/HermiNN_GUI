@@ -24,7 +24,7 @@ db_schema:
     server: full
     title: Users
 dependencies: []
-metadata: {title: HermiNN GUI}
+metadata: {logo_img: 'asset:OST logo.png', title: HermiNN GUI}
 name: HermiNN GUI
 package_name: HermiNN_GUI
 renamed: true
